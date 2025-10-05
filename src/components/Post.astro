@@ -1,0 +1,427 @@
+<main id="main"></main>
+<!-- Image Enlargement Modal -->
+<div id="image-modal">
+    <span class="close-button" id="image_close_button">&times;</span>
+    <img id="enlarged-image" src="" alt="Enlarged Image" />
+</div>
+
+<script>
+    const urlString = window.location.href;
+    const url = new URL(urlString);
+    const params = new URLSearchParams(url.search);
+    const search_id = params.get("post_id");
+    var update_divs = false;
+    fetch(
+        "https://raw.githubusercontent.com/gymnasium201-kyiv/news-storage/refs/heads/main/news-storage/" +
+            search_id +
+            "/post_info.json",
+    )
+        .then((response) => response.text())
+        .then((data) => {
+            var json = JSON.parse(data);
+            var data_to_paste = "";
+            data_to_paste +=
+                '<body class="p-4 sm:p-6 lg:p-8"><div class="container mx-auto bg-white rounded-xl shadow-lg p-6 sm:p-8 lg:p-10 mb-8">';
+            data_to_paste +=
+                '<h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-4 text-center">' +
+                json["post_title"] +
+                "</h1>";
+            data_to_paste +=
+                '<p class="text-gray-500 text-sm sm:text-base text-center mb-6">' +
+                "Опубліковано " +
+                json["post_date"] +
+                "</p>";
+            data_to_paste +=
+                '<div class="md:flex md:items-start md:space-x-8 mb-10"><div class="md:w-1/2 mb-8 md:mb-0 rounded-xl overflow-hidden shadow-md"><img src="' +
+                "https://raw.githubusercontent.com/gymnasium201-kyiv/news-storage/refs/heads/main/news-storage/" +
+                search_id +
+                "/" +
+                json["main_image"] +
+                '" id="main_image" class="w-full h-auto object-cover rounded-xl"></div>';
+            data_to_paste +=
+                '<div class="md:w-1/2 prose prose-lg text-gray-700 leading-relaxed mx-auto md:mx-0">' +
+                json["post_text"][0] +
+                "</div></div>";
+            if (json["post_images"].length > 0) {
+                data_to_paste +=
+                    '<h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Інші фото:</h2><div class="slideshow-container relative w-full h-auto mb-10 bg-gray-100 p-4">';
+                if (json["post_images"].length > 1) {
+                    var j = 0;
+                    data_to_paste +=
+                        "<a class='prev' id='image_left_slide'>&#10094;</a><a class='next' id='image_right_slide'>&#10095;</a>";
+                    while (j < json["post_images"].length) {
+                        data_to_paste +=
+                            '<div class="myImageSlides image-slides fade"><img src="' +
+                            "https://raw.githubusercontent.com/gymnasium201-kyiv/news-storage/refs/heads/main/news-storage/" +
+                            search_id +
+                            "/" +
+                            json["post_images"][j] +
+                            '" class="rounded-lg shadow-md"></div>';
+                        j += 1;
+                    }
+                } else {
+                    data_to_paste +=
+                        '<div class="myImageSlides image-slides fade"><img src="' +
+                        "https://raw.githubusercontent.com/gymnasium201-kyiv/news-storage/refs/heads/main/news-storage/" +
+                        search_id +
+                        "/" +
+                        json["post_images"][0] +
+                        '" class="rounded-lg shadow-md"></div>';
+                }
+                data_to_paste += "</div>";
+            }
+            if (json["post_documents"].length > 0) {
+                data_to_paste +=
+                    '<h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Прикріплені файли:</h2><div class="overflow-x-auto rounded-lg shadow-md mb-10"><table class="min-w-full bg-white border-collapse"><thead><tr class="bg-teal-400 text-white"><th class="py-3 px-4 text-left text-sm font-semibold uppercase tracking-wider rounded-tl-lg">Назва файлу</th><th class="py-3 px-4 text-left text-sm font-semibold uppercase tracking-wider rounded-tr-lg">Посилання на завантаження</th></tr></thead>';
+                data_to_paste += "<tbody>";
+                var j = 0;
+                while (j < json["post_documents"].length) {
+                    data_to_paste +=
+                        '<tr class="border-b border-gray-200 hover:bg-gray-50"><td class="py-3 px-4 text-gray-800">' +
+                        json["post_documents"][j] +
+                        '</td><td class="py-3 px-4"><a href="' +
+                        "https://raw.githubusercontent.com/gymnasium201-kyiv/news-storage/refs/heads/main/news-storage/" +
+                        search_id +
+                        "/" +
+                        json["post_documents"][j] +
+                        '" class="text-indigo-600 hover:text-indigo-800 font-medium">Завантажити</a></td></tr>';
+                    j += 1;
+                }
+                data_to_paste += "</tbody></table></div>";
+            }
+            if (json["post_videos"].length > 0) {
+                data_to_paste +=
+                    '<h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Прикріплені відео:</h2><div class="slideshow-container relative w-full h-auto bg-gray-100 p-4">';
+                data_to_paste +=
+                    "<a class='prev' id='video_left_slide'>&#10094;</a><a class='next' id='video_right_slide'>&#10095;</a>";
+                var j = 0;
+                while (j < json["post_videos"].length) {
+                    data_to_paste +=
+                        '<div class="myVideoSlides video-slides fade"><div class="video-responsive-wrapper" style="padding-top: 56.25%;"><iframe class="absolute top-0 left-0 w-full h-full rounded-lg shadow-md" src="' +
+                        json["post_videos"][j] +
+                        '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen> </iframe></div></div>';
+                    j += 1;
+                }
+                data_to_paste += "</div>";
+            }
+            var main_area = document.getElementById("main");
+            main_area!.innerHTML += data_to_paste;
+        });
+
+    var slideImageIndex = 1;
+    var slideVideoIndex = 1;
+
+    function plusImageDivs(n: number) {
+        showImageDivs((slideImageIndex += n));
+    }
+
+    function plusVideoDivs(n: number) {
+        showVideoDivs((slideVideoIndex += n));
+    }
+
+    function showImageDivs(n: number) {
+        var i;
+        var x = document.getElementsByClassName(
+            "myImageSlides",
+        ) as HTMLCollectionOf<HTMLElement>;
+        if (n > x.length) {
+            slideImageIndex = 1;
+        }
+        if (n < 1) {
+            slideImageIndex = x.length;
+        }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideImageIndex - 1].style.display = "block";
+    }
+
+    function showVideoDivs(n: number) {
+        var i;
+        var x = document.getElementsByClassName(
+            "myVideoSlides",
+        ) as HTMLCollectionOf<HTMLElement>;
+        if (n > x.length) {
+            slideVideoIndex = 1;
+        }
+        if (n < 1) {
+            slideVideoIndex = x.length;
+        }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideVideoIndex - 1].style.display = "block";
+    }
+
+    // Functions for image enlargement modal
+    function openImageModal(imgSrc) {
+        const modal = document.getElementById("image-modal");
+        const enlargedImage = document.getElementById("enlarged-image");
+        enlargedImage.src = imgSrc;
+        modal.classList.add("active"); // Show the modal
+        document.body.style.overflow = "hidden"; // Prevent scrolling of the background
+    }
+
+    function closeImageModal() {
+        const modal = document.getElementById("image-modal");
+        modal.classList.remove("active"); // Hide the modal
+        document.body.style.overflow = "auto"; // Restore scrolling of the background
+    }
+
+    var main_element = document.getElementById("main");
+    var observer = new MutationObserver(function (mutationsList, observer) {
+        var image_slideshow_there = document.getElementById("image_left_slide");
+        if (image_slideshow_there != null) {
+            var leftSlideButton = document.getElementById("image_left_slide")!;
+            leftSlideButton.addEventListener("click", function () {
+                plusImageDivs(-1);
+            });
+
+            var rightSlideButton =
+                document.getElementById("image_right_slide")!;
+            rightSlideButton.addEventListener("click", function () {
+                plusImageDivs(+1);
+            });
+        }
+
+        var video_slideshow_there = document.getElementById("video_left_slide");
+        if (video_slideshow_there != null) {
+            var leftSlideButton = document.getElementById("video_left_slide")!;
+            leftSlideButton.addEventListener("click", function () {
+                plusVideoDivs(-1);
+            });
+
+            var rightSlideButton =
+                document.getElementById("video_right_slide")!;
+            rightSlideButton.addEventListener("click", function () {
+                plusVideoDivs(+1);
+            });
+        }
+
+        document
+            .getElementById("main_image")
+            ?.addEventListener("click", function () {
+                openImageModal(this.src);
+            });
+
+        // Attach click listener to all images in the 'image-slides' slideshow
+        const slideshowImages = document.querySelectorAll(".image-slides img");
+        slideshowImages.forEach((img) => {
+            img.addEventListener("click", function () {
+                openImageModal(this.src);
+            });
+        });
+
+        // Close modal if clicking on the overlay itself
+        document
+            .getElementById("image-modal")
+            .addEventListener("click", function (event) {
+                if (event.target === this) {
+                    // Check if the click was on the modal overlay, not its children
+                    closeImageModal();
+                }
+            });
+
+        document
+            .getElementById("image_close_button")
+            ?.addEventListener("click", function () {
+                closeImageModal();
+            });
+
+        var any_video_there = document.getElementsByClassName(
+            "myVideoSlides",
+        ) as HTMLCollectionOf<HTMLElement>;
+        if (any_video_there.length > 0) {
+            showVideoDivs(slideVideoIndex);
+        }
+        
+        var any_image_there = document.getElementsByClassName(
+            "myImageSlides",
+        ) as HTMLCollectionOf<HTMLElement>;
+        if (any_image_there.length > 0) {
+            showImageDivs(slideImageIndex);
+        }
+    });
+    observer.observe(main_element, {
+        characterData: false,
+        childList: true,
+        attributes: false,
+    });
+</script>
+
+<style is:global>
+    body {
+        font-family: "Open Sans", sans-serif;
+        background-color: #f3f4f6; /* Light gray background */
+        font-size: larger;
+    }
+    .container {
+        margin-top: 25px;
+    }
+    .slideshow-container {
+        position: relative;
+        max-width: 100%;
+        overflow: hidden;
+        border-radius: 0.75rem; /* rounded-xl */
+    }
+    .myImageSlides {
+        display: none;
+        width: 100%;
+    }
+    .myVideoSlides {
+        display: none;
+        width: 100%;
+    }
+    /* Styling for images within slideshows */
+    .myImageSlides img {
+        width: 100%; /* Ensure image takes full width of its slide container */
+        height: auto; /* Maintain aspect ratio based on width */
+        max-height: 400px; /* Limit the maximum height of images in slideshow */
+        object-fit: contain; /* Scale image down to fit within the content box, maintaining aspect ratio */
+        display: block;
+        border-radius: 0.75rem; /* rounded-xl */
+        margin: 0 auto; /* Center the image horizontally */
+    }
+    /* Styling for iframes (videos) within slideshows */
+    .myVideoSlides iframe {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 0.75rem; /* rounded-xl */
+    }
+    /* Next & previous buttons */
+    .prev,
+    .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -22px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 10;
+    }
+    /* Position the "next button" to the right */
+    .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+    /* On hover, add a black background with a little more opacity */
+    .prev:hover,
+    .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+    /* Caption text */
+    .text {
+        color: #f2f2f2;
+        font-size: 15px;
+        padding: 8px 12px;
+        position: absolute;
+        bottom: 8px;
+        width: 100%;
+        text-align: center;
+    }
+    /* Number text (1/3 etc) */
+    .numbertext {
+        color: #f2f2f2;
+        font-size: 12px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
+    }
+    /* The dots/bullets/indicators */
+    .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+    .active,
+    .dot:hover {
+        background-color: #717171;
+    }
+    /* Fading animation */
+    .fade {
+        animation-name: fade;
+        animation-duration: 1.5s;
+    }
+    @keyframes fade {
+        from {
+            opacity: 0.4;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Styles for the image enlargement modal */
+    #image-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.75); /* Dark overlay */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; /* Ensure it's on top of everything */
+        /* hidden by default, controlled by JS */
+        display: none;
+    }
+
+    #image-modal.active {
+        display: flex;
+    }
+
+    #image-modal #enlarged-image {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain; /* Ensure the image fits within the modal */
+        border-radius: 0.75rem; /* rounded-xl */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+
+    #image-modal .close-button {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: white;
+        font-size: 50px;
+        font-weight: bold;
+        cursor: pointer;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        z-index: 10000; /* Ensure button is above image */
+    }
+
+    /* Styling for the responsive video wrapper, ensuring a minimum height */
+    .video-responsive-wrapper {
+        position: relative;
+        width: 100%;
+        /* The padding-top defines the aspect ratio for responsive videos */
+        padding-top: 56.25%; /* 16:9 Aspect Ratio (height / width) */
+        /* Add min-height to prevent the video from becoming too small */
+        min-height: 200px; /* Adjust this value as needed for desired minimum size */
+        overflow: hidden;
+        border-radius: 0.75rem;
+    }
+
+    .video-responsive-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%; /* Make iframe fill its parent's dimensions */
+        border-radius: 0.75rem;
+    }
+</style>

@@ -1,0 +1,163 @@
+---
+import schoollogo from "../assets/logo.jpg";
+---
+
+<header class="header">
+  <img src={schoollogo.src} alt="Логотип школи" class="header-logo">
+  <nav class="nav">
+    <ul class="nav-menu">
+      <li><a href="/">Новини</a></li>
+      <li><a href="/informaciya_pro_zaklad">Інформація про заклад</a></li>
+      <li><a href="/istoriya_shkoli">Історія гімназії</a></li>
+      <li><a href="/vidkritistj_ta_prozoristj_zakladu_osviti">Прозорість та інформаційна відкритість закладу</a></li>
+      <li><a href="/zaklad_chastina_yevropejsjkogo_osvitnjogo_prostoru">Заклад - частина європейського освітнього простору</a></li>
+      <li><a href="/osvitnij_proces">Освітній процес</a></li>
+    </ul>
+  </nav>
+  <div class="hamburger-menu">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+</header>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background: #f7f7f7;
+  }
+
+  /* Header */
+  .header {
+    background: #ffffff;
+    padding: 15px 40px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-logo {
+    max-width: 65px;
+    height: auto;
+  }
+
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+    /* For desktop, align items centrally */
+    justify-content: center; /* Centers items horizontally in a row */
+  }
+
+  .nav-menu a {
+    text-decoration: none;
+    color: #1f1f1f;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-size: 16px;
+    transition: color 0.3s ease;
+    display: block; /* Make links block-level to fill their container */
+    text-align: center; /* Center the text inside the block-level link */
+  }
+
+  .nav-menu a:hover {
+    color: #5f7d8c;
+  }
+
+  /* Hamburger menu styles */
+  .hamburger-menu {
+    display: none; /* Hidden by default on larger screens */
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+  }
+
+  .hamburger-menu .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #1f1f1f;
+    transition: all 0.3s ease;
+  }
+
+  /* Media queries for responsiveness */
+  @media (max-width: 1160px) {
+    .nav {
+      display: none; /* Hide the regular navigation */
+      width: 100%;
+      position: absolute;
+      top: 95px; /* Adjust based on your header height */
+      left: 0;
+      background: #ffffff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 10;
+      /* Center the entire nav overlay itself if it's not taking full width */
+      /* margin: 0 auto; */ /* Use if you want the nav to have a max-width and be centered */
+    }
+
+    .nav-menu {
+      flex-direction: column; /* Stack items vertically */
+      padding: 20px 0;
+      gap: 20px;
+      /* Crucially, align-items: center; centers the flex items along the cross axis (horizontally in a column layout) */
+      align-items: center;
+      /* Ensure the UL itself takes full width to allow its contents to center */
+      width: 100%;
+    }
+
+    .nav-menu li {
+      width: 100%; /* Make each list item take the full available width */
+      /* text-align: center; */ /* This isn't needed here if the anchor is block and centered */
+    }
+
+    .nav-menu a {
+      display: block; /* Make the link a block to fill the LI and allow text-align */
+      padding: 10px 0;
+      width: 100%; /* Ensure the link fills the LI for consistent click area */
+      text-align: center; /* This will center the text within the block-level link */
+    }
+
+    .hamburger-menu {
+      display: flex; /* Show the hamburger menu on smaller screens */
+    }
+
+    /* Styles for when the menu is open */
+    .nav.open {
+      display: flex; /* Show the navigation when open. This flex property on .nav also helps centering its children */
+      justify-content: center; /* Centers the .nav-menu horizontally if .nav is a flex container */
+      align-items: flex-start; /* Aligns content to the top if needed for vertical spacing */
+    }
+
+    .hamburger-menu.open .bar:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger-menu.open .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger-menu.open .bar:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const nav = document.querySelector('.nav');
+
+    hamburgerMenu.addEventListener('click', () => {
+      nav.classList.toggle('open');
+      hamburgerMenu.classList.toggle('open');
+    });
+  });
+</script>

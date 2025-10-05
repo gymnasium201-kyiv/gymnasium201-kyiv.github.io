@@ -1,0 +1,176 @@
+---
+import schoollogo from "../assets/logo.jpg";
+import facebooklogo from "../assets/facebook.svg";
+import telegramlogo from "../assets/telegram.svg";
+---
+
+<section class="hero">
+  <img src={schoollogo.src} 
+       alt="Логотип школи" 
+       class="hero-logo">
+  <h1>Гімназія №201 м. Києва</h1>
+
+  <div class="social-icons">
+    <a href="https://www.facebook.com/szsh201" target="_blank" aria-label="Facebook" class="social-button">
+      <img src={facebooklogo.src} alt="Facebook Icon" class="social-icon-svg">
+    </a>
+    <a href="https://t.me/s/szch201Kyiv" target="_blank" aria-label="Telegram" class="social-button">
+      <img src={telegramlogo.src} alt="Telegram Icon" class="social-icon-svg">
+    </a>
+    <a href="http://school201.edukit.kiev.ua" target="_blank" aria-label="Telegram" class="social-button">
+      <img src={schoollogo.src} alt="School Icon" class="social-icon-svg">
+    </a>
+  </div>
+</section>
+
+<style>
+  /* Your existing CSS */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background: #f7f7f7;
+  }
+
+  /* Hero Section */
+  .hero {
+    background: rgb(75, 100, 150);
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+    position: relative; /* Needed for absolute positioning of social icons */
+    flex-wrap: wrap; 
+  }
+
+  .hero-logo {
+    max-width: 250px;
+    width: 100%;
+    padding-right: 5vh;
+  }
+
+  .hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 0; 
+  }
+
+  /* Social Icons Styling */
+  .social-icons {
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
+    display: flex;
+    gap: 15px; 
+    z-index: 1; 
+  }
+
+  /* Modified styles for social buttons and SVG icons */
+  .social-button { /* Applied to the <a> tag, acting as the button */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px; /* Diameter of the bubble */
+    height: 45px; /* Diameter of the bubble */
+    background-color: rgba(255, 255, 255, 0.2); 
+    border-radius: 50%; /* Makes it a circle */
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* No border or default button styling */
+    border: none;
+    cursor: pointer;
+    padding: 0; /* Remove default padding from anchor */
+  }
+
+  .social-button:hover {
+    background-color: rgba(255, 255, 255, 0.4); 
+    transform: scale(1.1); 
+  }
+
+  .social-icon-svg { /* Styling for the SVG image itself */
+    width: 100%; /* Make SVG fill 60% of the button's width */
+    height: 100%; /* Make SVG fill 60% of the button's height */
+    /*filter: invert(100%); /* This will turn black SVGs white */
+    /* If your SVGs are already white, you might not need filter: invert() */
+  }
+
+  /* Media Queries - Adjustments for Social Icons */
+  @media (max-width: 768px) {
+    .hero {
+      min-height: 15vh;
+      padding: 30px 15px;
+    }
+    
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+    
+    .hero-logo {
+      max-width: 180px;
+      padding-right: 3vh;
+    }
+
+    .social-icons {
+      top: 15px; 
+      right: 15px; 
+      gap: 10px;
+    }
+
+    .social-button {
+      width: 40px;
+      height: 40px;
+    }
+
+    .social-icon-svg {
+      width: 100%; /* Adjust SVG size for smaller buttons */
+      height: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      min-height: 10vh;
+      padding: 20px 10px;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-logo {
+      padding-right: 0;
+      margin-bottom: 15px;
+      max-width: 120px;
+    }
+    
+    .hero h1 {
+      font-size: 1.8rem;
+    }
+
+    .social-icons {
+      position: static; 
+      margin-top: 20px; 
+      justify-content: center; 
+      width: 100%; 
+      gap: 15px; 
+    }
+
+    .social-button {
+      width: 45px; 
+      height: 45px;
+    }
+
+    .social-icon-svg {
+      width: 100%; /* Restore original SVG size for the stacked layout */
+      height: 100%;
+    }
+  }
+</style>

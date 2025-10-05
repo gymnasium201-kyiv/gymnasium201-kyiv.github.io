@@ -1,0 +1,138 @@
+<main class="news-grid" id="blog_area">
+</main>
+
+<script>
+    function ensureLength(str) {
+        const desiredLength = 188;
+        if (str.length > desiredLength) {
+            return str.slice(0, desiredLength) + "...";
+        } else {
+            return str + "...";
+        }
+    }
+
+    async function loadBlogPosts() {
+        const urlString = window.location.href;
+        const url = new URL(urlString);
+        const params = new URLSearchParams(url.search);
+        const page_id = params.get("page");
+        if (page_id == null)
+        {
+            // Get the current URL
+            let currentUrl = window.location.href;
+            // Add a query parameter
+            let newUrl = currentUrl + '?page=1';
+            // Navigate to the new URL
+            window.location.href = newUrl;
+        }
+
+        try {
+            const response = await fetch('https://raw.githubusercontent.com/gymnasium201-kyiv/news-storage/refs/heads/main/storage_info.json');
+            const json = await response.json();
+            const blog_area = document.getElementById("blog_area");
+            let posts_to_paste_array = [];
+            
+            // Create an array of promises for fetching each post's data
+            const fetchPostPromises = [];
+            for (let i = json['posts'].length - 1 - ((page_id - 1) * 9); i >= 0 && i > json['posts'].length - 1 - ((page_id - 1) * 9) - 9; i--) {
+    fetchPostPromises.push(
+        fetch('https://raw.githubusercontent.com/gymnasium201-kyiv/news-storage/refs/heads/main/news-storage/' + json['posts'][i] + '/post_info.json')
+            .then(res => res.json())
+            .then(post_data => {
+                let desc = post_data['post_text'][0]
+                desc = desc.replace(/<[^>]*>/g, '');
+                desc = ensureLength(desc);
+                return `
+                    <article class="news-card" id="${json['posts'][i]}">
+                        <img src="https://raw.githubusercontent.com/gymnasium201-kyiv/news-storage/refs/heads/main/news-storage/${json['posts'][i]}/${post_data['main_image']}" alt="Новина" class="news-image">
+                        <div class="news-content">
+                            <div class="news-date">${post_data['post_date']}</div>
+                            <h2 class="news-title">${post_data['post_title']}</h2>
+                            <p>${desc}</p>
+                        </div>
+                    </article>
+                `;
+            })
+    );
+}
+
+            // Wait for all post fetches to complete
+            posts_to_paste_array = await Promise.all(fetchPostPromises);
+
+            // Join the HTML strings and update the DOM once
+            blog_area.innerHTML = posts_to_paste_array.join('');
+
+            // Attach event listeners after the elements are in the DOM
+            const postElements = document.querySelectorAll("article");
+            postElements.forEach(function (postElement) {
+                postElement.addEventListener("click", function () {
+                    const postId = this.id;
+                    const postUrl = `/post/?post_id=${postId}`;
+                    window.location.href = postUrl;
+                });
+            });
+
+        } catch (error) {
+            console.error("Error loading blog posts:", error);
+        }
+    }
+
+    // Call the async function to load posts when the script executes
+    loadBlogPosts();
+
+    function move_to_page(selected_id) {
+        window.alert(selected_id);
+    }
+</script>
+
+<style is:global>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Open Sans", sans-serif;
+        background: #f7f7f7;
+    }
+
+    /* News Section */
+    .news-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .news-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .news-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .news-content {
+        padding: 20px;
+    }
+
+    .news-date {
+        color: #5f7d8c;
+        font-family: "Oswald", sans-serif;
+        margin-bottom: 10px;
+    }
+
+    .news-title {
+        font-family: "Oswald", sans-serif;
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
+</style>
