@@ -2,41 +2,75 @@
 import schoollogo from "../assets/logo.jpg";
 ---
 
-<footer class="footer">
-    <div class="footer-content">
-        <div class="contacts">
-            <p>Адміністратор сайту - вчитель гімназії Чусов С.Є.</p>
-            <p>Творець сайту - вчитель гімназії Скопінцев Д. Д.</p>
+<footer class="text-white pt-12 pb-8 mt-6" style="background-color: rgb(75, 100, 150); border-color: rgb(110, 135, 185);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+
+            <!-- Блок 1: Фундаментальні Контакти та Фізичне Розташування -->
+            <div class="md:col-span-2">
+
+                <!-- Повна Адреса -->
+                <div class="mb-3">
+                    <p class="font-semibold" style="color: rgb(220, 230, 250);">Адреса:</p>
+                    <p class="text-lg" style="color: rgb(240, 245, 255);">Дніпровський район, проспект Воскресенський, 14А, м. Київ, 02130</p>
+                </div>
+
+                <!-- Номер Телефону -->
+                <div class="mb-3">
+                    <p class="font-semibold" style="color: rgb(220, 230, 250);">Номер Телефону:</p>
+                    <!-- Посилання: інлайн-стиль для кольору тексту -->
+                    <a href="tel:+380633197982" class="text-lg transition duration-150 rounded-md hover:underline" style="color: rgb(240, 245, 255);">
+                        +38 (063) 319-79-82
+                    </a>
+                </div>
+
+                <!-- Електронна Пошта -->
+                <div class="mb-6">
+                    <p class="font-semibold" style="color: rgb(220, 230, 250);">Електронна Пошта:</p>
+                     <!-- Посилання: інлайн-стиль для кольору тексту -->
+                    <a href="mailto:szhs201@ukr.net" class="text-lg transition duration-150 rounded-md hover:underline" style="color: rgb(240, 245, 255);">
+                        szhs201@ukr.net
+                    </a>
+                </div>
+            </div>
+
+            <!-- Блок 2: Коротка Карта (Міні-віджет) -->
+            <div class="md:col-span-2">
+                <!-- Заголовок: інлайн-стиль для акцентного кольору -->
+                <h3 class="text-xl font-bold mb-4" style="color: rgb(220, 230, 250);">Розташування на Карті</h3>
+                <div class="w-full rounded-xl overflow-hidden shadow-2xl h-48">
+                    <!-- Вбудований міні-віджет Google Maps (iframe-заглушка) -->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1057.3640536201472!2d30.598887007771065!3d50.4750554315028!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4d0236c6a2b53%3A0x64aabbf572f0e542!2sSecondary%20school%20%E2%84%96%20201!5e0!3m2!1sen!2sua!4v1760954317083!5m2!1sen!2sua"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen="true"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Карта розташування"
+                        class="rounded-xl"
+                    ></iframe>
+                </div>
+            </div>
         </div>
+
+        <!-- Роздільник та інформація про розробників -->
+        <div class="mt-10 pt-6 border-t border-gray-700 text-center">
+            <div class="mt-1 text-sm space-x-4" style="color: rgb(200, 215, 240);">
+                <span>
+                    Адміністратор сайту: 
+                    <!-- Посилання: інлайн-стиль для кольору тексту -->
+                    <a style="color: rgb(240, 245, 255);">вчитель гімназії Чусов С.Є.</a>
+                </span>
+                <span>|</span>
+                <span>
+                    Творець сайту: 
+                    <!-- Посилання: інлайн-стиль для кольору тексту -->
+                    <a style="color: rgb(240, 245, 255);">вчитель гімназії Скопінцев Д.Д.</a>
+                </span>
+            </div>
+        </div>
+
     </div>
 </footer>
-
-<style>
-  * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-  }
-
-  body {
-      font-family: 'Open Sans', sans-serif;
-      background: #f7f7f7;
-  }
-
-  /* Footer */
-  .footer {
-    background: rgb(75, 100, 150);
-      color: white;
-      padding: 40px 20px;
-      margin-top: 50px;
-  }
-
-  .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 30px;
-  }
-</style>
