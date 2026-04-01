@@ -4,7 +4,7 @@ import Hero from '../../components/Hero.astro';
 import Footer from '../../components/Footer.astro';
 import Layout from '../../layouts/Layout.astro';
 import Data from '../../components/osvitnij_proces/osvitnij_proces.astro';
-import CategoriesMenu from '../../components/vidkritistj_ta_prozoristj_zakladu_osviti/MCategories.astro'
+import CategoriesMenu from '../../components/osvitnij_proces/osvitnij_proces'
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -13,6 +13,7 @@ import CategoriesMenu from '../../components/vidkritistj_ta_prozoristj_zakladu_o
 <Layout>
 	<Header />
 	<Hero />
+	<CategoriesMenu />
     <Data />
 	<Footer />
 </Layout>
