@@ -1,6 +1,5 @@
-
-<div style="display: flex; justify-content: center; align-items: center; text-align: center; margin-top: 25px;">
-    <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center">Новини</h2>
+<div class="page-title-container">
+    <h2 class="page-title">Новини</h2>
 </div>
 <main class="news-grid" id="blog_area">
 </main>
@@ -99,6 +98,39 @@
     body {
         font-family: "Open Sans", sans-serif;
         background: #f7f7f7;
+    }
+
+    .page-title-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+        margin-bottom: 20px;
+    }
+
+    .page-title {
+        font-family: "Oswald", sans-serif; /* Використовуємо той самий шрифт, що й у новинах */
+        font-size: 42px; /* Робимо його масивнішим */
+        font-weight: 700;
+        color: #2c3e50; /* Темний, насичений сіро-синій колір */
+        text-transform: uppercase; /* Всі літери великі */
+        letter-spacing: 3px; /* Додаємо простору між літерами */
+        position: relative;
+        padding-bottom: 12px;
+        text-align: center;
+    }
+
+    /* Створюємо декоративну лінію під заголовком */
+    .page-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px; /* Довжина лінії */
+        height: 4px; /* Товщина лінії */
+        background-color: #5f7d8c; /* Ваш колір, який використовується для дат */
+        border-radius: 2px;
     }
 
     /* News Section */
