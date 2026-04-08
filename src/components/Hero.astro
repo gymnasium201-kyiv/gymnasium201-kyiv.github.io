@@ -5,10 +5,20 @@ import telegramlogo from "../assets/telegram.svg";
 ---
 
 <section class="hero">
-  <img src={schoollogo.src} 
-       alt="Логотип школи" 
-       class="hero-logo">
-  <h1>Гімназія №201 Дніпровського району м. Києва</h1>
+  <div class="animated-background">
+    <div class="pop-item item-1">🎓</div>
+    <div class="pop-item item-2">📚</div>
+    <div class="pop-item item-3">✏️</div>
+    <div class="pop-item item-4">🌟</div>
+    <div class="pop-item item-5">🎒</div>
+  </div>
+
+  <div class="hero-content">
+    <img src={schoollogo.src} 
+         alt="Логотип школи" 
+         class="hero-logo">
+    <h1>Гімназія №201 Дніпровського району м. Києва</h1>
+  </div>
 
   <div class="social-icons">
     <a href="https://www.facebook.com/szsh201" target="_blank" aria-label="Facebook" class="social-button">
@@ -17,14 +27,13 @@ import telegramlogo from "../assets/telegram.svg";
     <a href="https://t.me/s/szch201Kyiv" target="_blank" aria-label="Telegram" class="social-button">
       <img src={telegramlogo.src} alt="Telegram Icon" class="social-icon-svg">
     </a>
-    <a href="http://school201.edukit.kiev.ua" target="_blank" aria-label="Telegram" class="social-button">
+    <a href="http://school201.edukit.kiev.ua" target="_blank" aria-label="School Website" class="social-button">
       <img src={schoollogo.src} alt="School Icon" class="social-icon-svg">
     </a>
   </div>
 </section>
 
 <style>
-  /* Your existing CSS */
   * {
     margin: 0;
     padding: 0;
@@ -48,8 +57,67 @@ import telegramlogo from "../assets/telegram.svg";
     align-items: center;
     text-align: center;
     padding: 40px 20px;
-    position: relative; /* Needed for absolute positioning of social icons */
+    position: relative; 
     flex-wrap: wrap; 
+    overflow: hidden; /* CRITICAL: Prevents animations from expanding the section size */
+  }
+
+  /* --- NEW: Animation Styles --- */
+  .animated-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Prevents animations from blocking clicks */
+    z-index: 0; 
+  }
+
+  .pop-item {
+    position: absolute;
+    opacity: 0; /* Hidden by default */
+    font-size: 3rem; /* Size of the emojis. Change width/height if using images */
+    animation: popAndFloat linear infinite;
+  }
+
+  /* Individual timings and positions for the random effect */
+  .item-1 { left: 10%; bottom: -20px; animation-duration: 7s; animation-delay: 0s; }
+  .item-2 { left: 30%; bottom: -20px; animation-duration: 9s; animation-delay: 2s; }
+  .item-3 { left: 60%; bottom: -20px; animation-duration: 6s; animation-delay: 4s; }
+  .item-4 { left: 85%; bottom: -20px; animation-duration: 8s; animation-delay: 1s; }
+  .item-5 { left: 50%; bottom: -20px; animation-duration: 10s; animation-delay: 5s; }
+
+  @keyframes popAndFloat {
+    0% {
+      opacity: 0;
+      transform: translateY(0) scale(0.5); /* Starts small and hidden */
+    }
+    15% {
+      opacity: 0.4;
+      transform: translateY(-20px) scale(1.2); /* Pops out slightly larger */
+    }
+    50% {
+      opacity: 0.2;
+      transform: translateY(-60px) scale(1); /* Floats up, returning to normal size */
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-120px) scale(0.8); /* Fades out as it drifts higher */
+    }
+  }
+
+  /* Keep content above the background animation */
+  .hero-content, .social-icons {
+    position: relative;
+    z-index: 1;
+  }
+  /* ------------------------------ */
+
+  .hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .hero-logo {
@@ -72,24 +140,21 @@ import telegramlogo from "../assets/telegram.svg";
     right: 20px; 
     display: flex;
     gap: 15px; 
-    z-index: 1; 
   }
 
-  /* Modified styles for social buttons and SVG icons */
-  .social-button { /* Applied to the <a> tag, acting as the button */
+  .social-button { 
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 45px; /* Diameter of the bubble */
-    height: 45px; /* Diameter of the bubble */
+    width: 45px; 
+    height: 45px; 
     background-color: rgba(255, 255, 255, 0.2); 
-    border-radius: 50%; /* Makes it a circle */
+    border-radius: 50%; 
     text-decoration: none;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    /* No border or default button styling */
     border: none;
     cursor: pointer;
-    padding: 0; /* Remove default padding from anchor */
+    padding: 0; 
   }
 
   .social-button:hover {
@@ -97,14 +162,12 @@ import telegramlogo from "../assets/telegram.svg";
     transform: scale(1.1); 
   }
 
-  .social-icon-svg { /* Styling for the SVG image itself */
-    width: 100%; /* Make SVG fill 60% of the button's width */
-    height: 100%; /* Make SVG fill 60% of the button's height */
-    /*filter: invert(100%); /* This will turn black SVGs white */
-    /* If your SVGs are already white, you might not need filter: invert() */
+  .social-icon-svg { 
+    width: 100%; 
+    height: 100%; 
   }
 
-  /* Media Queries - Adjustments for Social Icons */
+  /* Media Queries */
   @media (max-width: 768px) {
     .hero {
       min-height: 15vh;
@@ -131,9 +194,8 @@ import telegramlogo from "../assets/telegram.svg";
       height: 40px;
     }
 
-    .social-icon-svg {
-      width: 100%; /* Adjust SVG size for smaller buttons */
-      height: 100%;
+    .pop-item {
+      font-size: 2rem; /* Make popping items smaller on mobile */
     }
   }
 
@@ -166,11 +228,6 @@ import telegramlogo from "../assets/telegram.svg";
     .social-button {
       width: 45px; 
       height: 45px;
-    }
-
-    .social-icon-svg {
-      width: 100%; /* Restore original SVG size for the stacked layout */
-      height: 100%;
     }
   }
 </style>
