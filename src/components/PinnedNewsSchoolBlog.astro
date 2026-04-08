@@ -1,3 +1,6 @@
+<div class="page-title-container">
+    <h2 class="page-title">Важливі повідомлення</h2>
+</div>
 <main class="news-grid" id="pinned_blog_area">
 </main>
 
@@ -97,7 +100,36 @@
         background: #f7f7f7;
     }
 
-    /* News Section */
+    .page-title-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+        margin-bottom: 20px;
+    }
+
+    .page-title {
+        font-family: "Oswald", sans-serif;
+        font-size: 42px;
+        font-weight: 700;
+        color: #2c3e50;
+        position: relative;
+        padding-bottom: 12px;
+        text-align: center;
+    }
+
+    .page-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background-color: rgb(75, 100, 150);
+        border-radius: 2px;
+    }
+
     .news-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
