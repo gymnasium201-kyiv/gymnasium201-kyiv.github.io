@@ -109,31 +109,28 @@
     }
 
     .page-title {
-        font-family: "Oswald", sans-serif; /* Використовуємо той самий шрифт, що й у новинах */
-        font-size: 42px; /* Робимо його масивнішим */
+        font-family: "Oswald", sans-serif;
+        font-size: 42px;
         font-weight: 700;
-        color: #2c3e50; /* Темний, насичений сіро-синій колір */
-        text-transform: uppercase; /* Всі літери великі */
-        letter-spacing: 3px; /* Додаємо простору між літерами */
+        color: #2c3e50;
+        letter-spacing: 3px;
         position: relative;
         padding-bottom: 12px;
         text-align: center;
     }
 
-    /* Створюємо декоративну лінію під заголовком */
     .page-title::after {
         content: '';
         position: absolute;
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
-        width: 80px; /* Довжина лінії */
-        height: 4px; /* Товщина лінії */
-        background-color: #5f7d8c; /* Ваш колір, який використовується для дат */
+        width: 80px;
+        height: 4px;
+        background-color: #5f7d8c;
         border-radius: 2px;
     }
 
-    /* News Section */
     .news-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
