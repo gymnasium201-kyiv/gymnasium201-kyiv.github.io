@@ -35,7 +35,23 @@
 
         <!-- Dynamic News Grid Container -->
         <div class="news-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" id="blog_area">
-            <!-- Dynamic items loaded via Client Script -->
+            <!-- Skeleton Loaders для покращення UX/CLS -->
+            {Array.from({ length: 6 }).map(() => (
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 animate-pulse flex flex-col justify-between h-[420px]">
+                    <div>
+                        <div class="h-48 sm:h-52 bg-slate-200"></div>
+                        <div class="p-5 sm:p-6 space-y-3">
+                            <div class="h-4 bg-slate-200 rounded w-1/3"></div>
+                            <div class="h-6 bg-slate-200 rounded w-3/4"></div>
+                            <div class="h-4 bg-slate-200 rounded w-full"></div>
+                            <div class="h-4 bg-slate-200 rounded w-2/3"></div>
+                        </div>
+                    </div>
+                    <div class="p-5 sm:p-6 pt-0">
+                        <div class="h-10 bg-slate-200 rounded-xl w-full"></div>
+                    </div>
+                </div>
+            ))}
         </div>
     </section>
 </main>
@@ -49,14 +65,16 @@
         }
     }
 
+    // Хелпер для оптимізації URL зображення через CDN (WebP + Resize)
+    function getOptimizedImageUrl(rawUrl: string, width = 600, quality = 80) {
+        if (!rawUrl) return 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80';
+        return `https://images.weserv.nl/?url=${encodeURIComponent(rawUrl)}&w=${width}&output=webp&q=${quality}`;
+    }
+
     // Fetch and Load Blog Posts
     async function loadBlogPosts() {
         const urlParams = new URLSearchParams(window.location.search);
-        let page_id = urlParams.get("page");
-
-        if (!page_id) {
-            page_id = "1";
-        }
+        let page_id = urlParams.get("page") || "1";
         const pageNum = parseInt(page_id, 10);
 
         try {
@@ -66,11 +84,12 @@
 
             if (!blog_area) return;
 
-            const fetchPostPromises = [];
-            const posts = json['posts'];
+            const posts = json['posts'] || [];
             const postsPerPage = 9;
             const startIndex = posts.length - 1 - ((pageNum - 1) * postsPerPage);
             const endIndex = posts.length - 1 - ((pageNum - 1) * postsPerPage) - postsPerPage;
+
+            const fetchPostPromises = [];
 
             for (let i = startIndex; i >= 0 && i > endIndex; i--) {
                 const postId = posts[i];
@@ -81,7 +100,9 @@
                             let rawText = post_data['post_text'] ? post_data['post_text'].join('\n\n') : '';
                             let cleanDesc = rawText.replace(/<[^>]*>/g, '');
                             let shortDesc = ensureLength(cleanDesc, 160);
-                            let mainImgUrl = `https://raw.githubusercontent.com/gymnasium201-kyiv/news-storage/refs/heads/main/news-storage/${postId}/${post_data['main_image']}`;
+                            
+                            const rawImgUrl = `https://raw.githubusercontent.com/gymnasium201-kyiv/news-storage/refs/heads/main/news-storage/${postId}/${post_data['main_image']}`;
+                            const optimizedImgUrl = getOptimizedImageUrl(rawImgUrl, 600, 80);
 
                             return {
                                 id: postId,
@@ -89,23 +110,36 @@
                                 date: post_data['post_date'],
                                 fullText: cleanDesc,
                                 shortDesc: shortDesc,
-                                image: mainImgUrl
+                                image: optimizedImgUrl
                             };
                         })
                 );
             }
 
-            const postsData = await Promise.all(fetchPostPromises);
+            // Використовуємо Settled, щоб поодинокі помилки 404 не ламали всю сторінку
+            const results = await Promise.allSettled(fetchPostPromises);
+            const postsData = results
+                .filter((res): res is PromiseFulfilledResult<any> => res.status === 'fulfilled')
+                .map(res => res.value);
 
-            // Generate HTML using Tailwind CSS structure
+            if (postsData.length === 0) {
+                blog_area.innerHTML = `<p class="col-span-full text-center text-slate-500 py-10">Новин не знайдено.</p>`;
+                return;
+            }
+
+            // Generate HTML
             blog_area.innerHTML = postsData.map(post => `
                 <article class="news-card bg-white rounded-2xl overflow-hidden shadow-md border border-slate-100 flex flex-col justify-between hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group cursor-pointer" id="${post.id}">
                     <div>
-                        <div class="relative overflow-hidden h-48 sm:h-52">
+                        <div class="relative overflow-hidden h-48 sm:h-52 bg-slate-100">
                             <img src="${post.image}"
                                  alt="${post.title}"
+                                 loading="lazy"
+                                 decoding="async"
+                                 width="600"
+                                 height="350"
                                  class="news-image w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                 onerror="this.src='https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80'">
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80'">
                         </div>
                         <div class="news-content p-5 sm:p-6">
                             <div class="news-date flex items-center gap-2 text-slate-500 font-oswald text-xs sm:text-sm font-medium mb-2">
@@ -129,15 +163,14 @@
                 </article>
             `).join('');
 
-            // Navigate to individual post page on card click
-            postsData.forEach(post => {
-                const card = document.getElementById(post.id);
-                card?.addEventListener('click', (e) => {
-                    // Перевірка, щоб лінк не тригерився двічі при кліку безпосередньо на кнопку <a>
-                    if (!(e.target as HTMLElement).closest('a')) {
-                        window.location.href = `https://gymnasium201-kyiv.github.io/post/?post_id=${post.id}`;
-                    }
-                });
+            // Event delegation замість циклу addEventListener для кожного картки
+            blog_area.addEventListener('click', (e) => {
+                const target = e.target as HTMLElement;
+                const card = target.closest('.news-card') as HTMLElement;
+                
+                if (card && !target.closest('a')) {
+                    window.location.href = `https://gymnasium201-kyiv.github.io/post/?post_id=${card.id}`;
+                }
             });
 
         } catch (error) {
