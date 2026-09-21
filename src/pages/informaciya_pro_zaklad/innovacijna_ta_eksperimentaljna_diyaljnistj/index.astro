@@ -13,9 +13,258 @@ import CategoriesMenuInnovacija from '../../../components/InformationAboutInstit
 
 <Layout>
 	<Header />
-	<Hero />
-	<CategoriesMenu />
+	<!-- HERO HEADER SECTION -->
+  <header class="relative bg-gradient-to-br from-[#394e77] via-[#4b6496] to-[#2c3e50] text-white overflow-hidden shadow-lg border-b border-indigo-900/20">
+    <!-- Animated Background Decorative Floating Icons -->
+    <div class="animated-background absolute inset-0 overflow-hidden pointer-events-none z-0">
+      <div class="pop-item item-1 text-4xl text-white/30"><i class="fa-solid fa-graduation-cap"></i></div>
+      <div class="pop-item item-2 text-3xl text-white/30"><i class="fa-solid fa-flask"></i></div>
+      <div class="pop-item item-3 text-4xl text-white/30"><i class="fa-solid fa-atom"></i></div>
+      <div class="pop-item item-4 text-3xl text-white/30"><i class="fa-solid fa-lightbulb"></i></div>
+      <div class="pop-item item-5 text-4xl text-white/30"><i class="fa-solid fa-microscope"></i></div>
+    </div>
+
+    <!-- Main Hero Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-6 py-12 md:py-16 flex flex-col md:flex-row items-center justify-center gap-6 text-center md:text-left">
+      <!-- Icon / Badge -->
+      <div class="relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-amber-400 to-indigo-400 rounded-full blur opacity-30 group-hover:opacity-75 transition duration-500"></div>
+        <div class="w-28 h-28 sm:w-36 sm:h-36 object-cover rounded-full border-4 border-white/80 shadow-2xl relative bg-white/10 backdrop-blur-md flex items-center justify-center text-amber-300 text-5xl sm:text-6xl">
+          <i class="fa-solid fa-flask-vial"></i>
+        </div>
+      </div>
+
+      <!-- Title & Subtitle -->
+      <div class="space-y-2 max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 border border-amber-300/30 text-amber-200 text-xs font-semibold uppercase tracking-wider mb-1">
+          <i class="fa-solid fa-microscope text-amber-300"></i> Освітній розвиток
+        </div>
+        <h1 class="font-oswald text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white drop-shadow-md leading-tight">
+          Інноваційна та експериментальна діяльність
+        </h1>
+        <p class="text-slate-200 font-light text-base sm:text-lg max-w-2xl mx-auto md:mx-0">
+          Розвиток творчих здібностей, сучасні освітні технології та експериментальні проєкти Гімназії №201
+        </p>
+      </div>
+    </div>
+  </header>
 	<CategoriesMenuInnovacija />
-    <Innovacijnataeksperimentaljnadiyaljnistj />
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    
+    <!-- PAGE SECTION HEADER -->
+    <div class="text-center mb-12">
+      <h2 class="page-title font-oswald text-3xl sm:text-4xl font-bold text-slate-800 relative pb-4 inline-block tracking-wide">
+        Ключові напрями та проєкти
+      </h2>
+      <p class="text-slate-500 text-sm sm:text-base mt-2 max-w-xl mx-auto">
+        Впровадження інновацій у навчання для формування безпечного та сучасного освітнього середовища
+      </p>
+    </div>
+
+    <!-- CONTENT CARDS GRID -->
+    <div class="space-y-8">
+
+      <!-- ITEM 1: Експериментальний заклад -->
+      <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-100 hover:shadow-xl transition-all duration-300 border-l-8 border-l-[#4b6496] relative overflow-hidden group">
+        <div class="flex flex-col md:flex-row md:items-start gap-5">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-[#4b6496] flex items-center justify-center text-2xl font-bold font-oswald flex-shrink-0 group-hover:scale-110 transition-transform">
+            01
+          </div>
+          <div class="space-y-4 flex-grow">
+            <h3 class="font-oswald text-xl sm:text-2xl font-bold text-slate-900 leading-snug">
+              Гімназія №201 м. Києва – експериментальний заклад всеукраїнського рівня
+            </h3>
+            
+            <p class="text-indigo-900/80 font-semibold text-base sm:text-lg bg-indigo-50/60 p-3.5 rounded-xl border border-indigo-100/60 inline-block">
+              Проблема: «Організаційно-педагогічні умови функціонування та розвитку безпечної школи у воєнний/повоєнний час»
+            </p>
+
+            <div class="flex items-center gap-2 text-xs sm:text-sm font-semibold text-amber-600 bg-amber-50 px-3 py-1.5 rounded-lg w-fit">
+              <i class="fa-regular fa-calendar-check"></i>
+              <span>Термін реалізації проєкту: лютий 2023 року – грудень 2027 року</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+              <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                <h4 class="font-bold text-[#4b6496] text-sm mb-1 flex items-center gap-2">
+                  <i class="fa-solid fa-users text-xs"></i> Учасники проєкту
+                </h4>
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                  Беруть участь заклади загальної середньої освіти з м. Києва (12 закладів), Донецької, Запорізької, Луганської, Львівської, Сумської і Тернопільської областей (усього 50 ЗЗСО України).
+                </p>
+              </div>
+
+              <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                <h4 class="font-bold text-[#4b6496] text-sm mb-1 flex items-center gap-2">
+                  <i class="fa-solid fa-bullseye text-xs"></i> Мета проєкту
+                </h4>
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                  Сприяння дотриманню правил і норм фізичної, психологічної, інформаційної та соціальної безпеки, запобігання насильству й створення ресурсної бази підтримки для учнів, педагогів і батьків.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 2: Діяльнісний підхід -->
+      <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-100 hover:shadow-xl transition-all duration-300 border-l-8 border-l-emerald-500 relative overflow-hidden group">
+        <div class="flex flex-col md:flex-row md:items-start gap-5">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl font-bold font-oswald flex-shrink-0 group-hover:scale-110 transition-transform">
+            02
+          </div>
+          <div class="space-y-3 flex-grow">
+            <h3 class="font-oswald text-xl sm:text-2xl font-bold text-slate-900 leading-snug">
+              Діяльнісний підхід та здоровий спосіб життя
+            </h3>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Розвитку творчих здібностей, формуванню позитивної мотивації на здоровий спосіб життя, збереженню та зміцненню здоров’я сприяє робота педагогів школи із використанням діяльнісного підходу до організації навчання та виховання. Він передбачає врахування природних особенностей розвитку дітей та їхніх вікових можливостей через навчання в грі, спів та рухову активность.
+            </p>
+            <div class="p-4 bg-emerald-50/50 rounded-xl border border-emerald-100 text-xs sm:text-sm text-slate-700">
+              <span class="font-bold text-emerald-700"><i class="fa-solid fa-graduation-cap mr-1"></i> Програми навчання:</span> Усі учні 1–9 класів навчаються за програмою НУШ.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 3: Формула НУШ -->
+      <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-100 hover:shadow-xl transition-all duration-300 border-l-8 border-l-[#4b6496] relative group">
+        <div class="flex flex-col md:flex-row md:items-start gap-5">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-[#4b6496] flex items-center justify-center text-2xl font-bold font-oswald flex-shrink-0 group-hover:scale-110 transition-transform">
+            03
+          </div>
+          <div class="space-y-4 flex-grow">
+            <h3 class="font-oswald text-xl sm:text-2xl font-bold text-slate-900 leading-snug">
+              Концепція Нової української школи (НУШ)
+            </h3>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Особистісно зорієнтована модель освіти ставить понад усе інтереси та здібності дитини, бере до уваги її погляди, враховує її потреби та особливості розвитку.
+            </p>
+
+            <div class="pt-2">
+              <h4 class="font-oswald text-lg font-bold text-[#4b6496] mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-[#4b6496] fa-diagram-project"></i> Формула НУШ складається з компонентів:
+              </h4>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm font-medium text-slate-700">
+                  <i class="fa-solid fa-circle-check text-[#4b6496]"></i>
+                  <span>Формування компетентностей</span>
+                </div>
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm font-medium text-slate-700">
+                  <i class="fa-solid fa-circle-check text-[#4b6496]"></i>
+                  <span>Умотивований учитель з автономією</span>
+                </div>
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm font-medium text-slate-700">
+                  <i class="fa-solid fa-circle-check text-[#4b6496]"></i>
+                  <span>Ціннісне виховання</span>
+                </div>
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm font-medium text-slate-700">
+                  <i class="fa-solid fa-circle-check text-[#4b6496]"></i>
+                  <span>Автономія для шкіл</span>
+                </div>
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm font-medium text-slate-700">
+                  <i class="fa-solid fa-circle-check text-[#4b6496]"></i>
+                  <span>Трикутник: учень-вчитель-батьки</span>
+                </div>
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs sm:text-sm font-medium text-slate-700">
+                  <i class="fa-solid fa-circle-check text-[#4b6496]"></i>
+                  <span>Дитиноцентризм та нова структура</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM 4: Гранти та 3D STEM лабораторія -->
+      <div class="bg-gradient-to-br from-[#394e77] to-[#2c3e50] text-white rounded-2xl p-6 sm:p-8 shadow-xl relative overflow-hidden group">
+        <!-- Background Glow -->
+        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="flex flex-col md:flex-row md:items-start gap-5 relative z-10">
+          <div class="w-12 h-12 rounded-2xl bg-amber-400 text-slate-900 flex items-center justify-center text-2xl font-bold font-oswald flex-shrink-0 group-hover:scale-110 transition-transform">
+            04
+          </div>
+          <div class="space-y-4 flex-grow">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="bg-amber-400/20 text-amber-300 border border-amber-300/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                <i class="fa-solid fa-trophy mr-1"></i> Переможці конкурсу грантів
+              </span>
+            </div>
+            <h3 class="font-oswald text-2xl sm:text-3xl font-bold text-white leading-snug">
+              3D STEM лабораторія «Леонардо да Вінчі»
+            </h3>
+            <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+              Наш заклад став переможцем конкурсу на отримання грантів Київського міського голови у галузі освіти за напрямом <strong class="text-amber-300">«Новий освітній простір»</strong>!
+            </p>
+            <div class="bg-white/10 backdrop-blur-md p-4 sm:p-5 rounded-xl border border-white/15 text-xs sm:text-sm text-slate-100 leading-relaxed space-y-2">
+              <p>
+                Тепер у нашій гімназії успішно працює сучасна 3D STEM лабораторія. Вона забезпечує відкритий доступ до експериментальної роботи здобувачів освіти.
+              </p>
+              <p class="text-amber-200 font-medium">
+                Розроблені вчителями-практиками методики реалізуються через передачу досвіду у викладанні STEM-напряму всім зацікавленим учасникам освітнього процесу.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+<style>
+  /* Custom floating animation for hero background items */
+  .pop-item {
+    position: absolute;
+    opacity: 0;
+    animation: popAndFloat 8s linear infinite;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  @keyframes popAndFloat {
+    0% {
+      opacity: 0;
+      transform: translateY(20px) scale(0.6) rotate(0deg);
+    }
+    15% {
+      opacity: 0.35;
+      transform: translateY(-15px) scale(1.1) rotate(10deg);
+    }
+    50% {
+      opacity: 0.25;
+      transform: translateY(-50px) scale(1) rotate(-10deg);
+    }
+    85% {
+      opacity: 0.15;
+      transform: translateY(-100px) scale(0.9) rotate(15deg);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-140px) scale(0.7) rotate(30deg);
+    }
+  }
+
+  .item-1 { left: 8%; bottom: -10px; animation-duration: 7s; animation-delay: 0s; }
+  .item-2 { left: 28%; bottom: -10px; animation-duration: 9s; animation-delay: 2.2s; }
+  .item-3 { left: 58%; bottom: -10px; animation-duration: 6.5s; animation-delay: 4.1s; }
+  .item-4 { left: 78%; bottom: -10px; animation-duration: 8.5s; animation-delay: 1.2s; }
+  .item-5 { left: 92%; bottom: -10px; animation-duration: 10s; animation-delay: 5s; }
+
+  /* Page title decorative line matching original spec */
+  .page-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #4b6496;
+    border-radius: 9999px;
+  }
+</style>
 	<Footer />
 </Layout>

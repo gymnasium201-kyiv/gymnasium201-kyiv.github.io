@@ -3,17 +3,247 @@ import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
 import Footer from '../../components/Footer.astro';
 import Layout from '../../layouts/Layout.astro';
-import InformationAboutInstitution from '../../components/InformationAboutInstitution/InformationAboutInstitution.astro'
 import CategoriesMenu from '../../components/InformationAboutInstitution/CategoriesMenuInfoAboutInst.astro'
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import schoollogo from "../assets/logo.jpg";
 ---
+
+<!-- Font Awesome & Google Fonts (зауважте, якщо вони вже підключені в MainLayout, ці посилання можна винести туди) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <Layout>
 	<Header />
-	<Hero />
 	<CategoriesMenu />
-    <InformationAboutInstitution />
+    <div class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 font-inter text-slate-800">
+    <div class="w-full bg-white p-6 sm:p-10 rounded-3xl shadow-xl border border-slate-100">
+        <article class="prose max-w-none">
+            
+            <!-- HEADER SECTION -->
+            <header class="text-center mb-12">
+                <h1 class="font-oswald text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 leading-tight tracking-wide relative pb-6 inline-block page-title">
+                    Гімназія №201 Дніпровського району м. Києва
+                </h1>
+            </header>
+        
+            <!-- MAIN PHOTO SECTION -->
+            <div class="text-center my-8 relative group">
+                <div class="absolute -inset-1 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-500"></div>
+                <img alt="Фото Гімназії №201" src="https://github.com/gymnasium201-kyiv/gymnasium201-kyiv.github.io/blob/main/public/informaciya_pro_zaklad/schoolphoto.jpg?raw=true"
+                     class="relative w-full h-auto max-h-[420px] object-cover rounded-2xl shadow-lg mx-auto border border-white" style="max-width: 750px;">
+            </div>
+        
+            <!-- ABOUT & SCHEDULE SECTION -->
+            <section class="mb-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Card 1: Про заклад -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-[#4b6496]/10 text-[#4b6496] flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-school"></i>
+                            </div>
+                            <h2 class="font-oswald text-2xl font-bold text-slate-900 m-0">Про заклад</h2>
+                        </div>
+                        <p class="text-slate-700 text-base leading-relaxed mb-3">
+                            Заклад заснований в <strong class="text-slate-900 font-semibold">1971 році</strong>, мова навчання – <strong class="text-slate-900 font-semibold">українська</strong>.
+                        </p>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                            У <strong class="text-slate-800 font-semibold">2026-2027</strong> навчальному році в <strong class="text-slate-800 font-semibold">26 класах</strong> школи навчаються <strong class="text-slate-800 font-semibold">712 учнів</strong>. Школа працює за п’ятиденним робочим тижнем.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Розклад -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center text-xl">
+                                <i class="fa-regular fa-clock"></i>
+                            </div>
+                            <h2 class="font-oswald text-2xl font-bold text-slate-900 m-0">Розклад</h2>
+                        </div>
+                        <p class="text-slate-700 text-base leading-relaxed mb-3">
+                            Навчальні заняття розпочинаються <strong class="text-slate-900 font-semibold">о 08:30</strong>.
+                        </p>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                            Освітній процес у закладі здійснюється на засадах <strong class="text-slate-800 font-semibold">дитиноцентризму</strong> відповідно до принципів <strong class="text-slate-800 font-semibold">НУШ</strong>.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        
+            <!-- EDUCATIONAL PROGRAM & STATUS SECTION -->
+            <section class="mb-12 p-6 sm:p-8 bg-gradient-to-br from-slate-50 via-indigo-50/30 to-slate-50 rounded-2xl shadow-sm border-l-4 border-[#4b6496] border-y border-r border-slate-200">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-[#4b6496] text-white flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <h2 class="font-oswald text-2xl font-bold text-slate-900 m-0">Освітні програми</h2>
+                </div>
+                
+                <p class="text-slate-700 text-base sm:text-lg mb-4 leading-relaxed">
+                    <strong class="font-semibold text-slate-900">1-9 класи</strong> працюють за програмою <strong class="font-semibold text-[#4b6496]">НУШ</strong>.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+                    <a href="https://drive.google.com/file/d/1SuOHOkZWUE3q11StyrlY0iA-JWBiM1C3/view" target="_blank" rel="noopener noreferrer" 
+                       class="btn-gradient-shadow text-white p-4 rounded-xl flex items-center justify-between no-underline group">
+                        <span class="font-medium text-sm sm:text-base">Річний навчальний план на 2026-2027 н.р.</span>
+                        <i class="fa-solid fa-file-pdf text-lg text-amber-300 group-hover:scale-110 transition-transform"></i>
+                    </a>
+                    
+                    <a href="https://drive.google.com/file/d/1RSmXGQSUVtEZWki2vBpzAeLuU70QGs1y/view" target="_blank" rel="noopener noreferrer" 
+                       class="btn-gradient-shadow text-white p-4 rounded-xl flex items-center justify-between no-underline group">
+                        <span class="font-medium text-sm sm:text-base">Освітня програма для 1-4 класів</span>
+                        <i class="fa-solid fa-file-pdf text-lg text-amber-300 group-hover:scale-110 transition-transform"></i>
+                    </a>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-slate-200">
+                    <h3 class="font-oswald text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-flask text-[#4b6496]"></i> Експериментальний статус
+                    </h3>
+                    <p class="text-slate-700 font-medium leading-relaxed m-0">
+                        Школа – експериментальний навчальний заклад всеукраїнського рівня з проблеми:
+                    </p>
+                    <div class="mt-3 text-slate-700 italic border-l-4 border-amber-500 pl-4 py-3 text-base sm:text-lg bg-white rounded-r-xl shadow-sm border border-slate-100">
+                        «Організаційно-педагогічні умови функціонування та розвитку безпечної школи у воєнний/повоєнний час».
+                    </div>
+                </div>
+            </section>
+        
+            <!-- ADDITIONAL INFO & SLOGAN SECTION -->
+            <section class="mb-12 space-y-6">
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
+                    <p class="text-slate-700 text-base leading-relaxed m-0">
+                        <i class="fa-solid fa-hospital-user text-[#4b6496] mr-2"></i>
+                        Протягом майже 50 років організовано освітній процес для дітей, що знаходяться на лікуванні у КНП «Київська дитяча клінічна лікарня №2».
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-sm">
+                        <h3 class="font-oswald text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-icons text-amber-500"></i> Позаурочна робота
+                        </h3>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed m-0">
+                            Розвитку особистості кожної дитини сприяє розгалужена система позаурочної роботи: в школі працюють <strong class="text-slate-900 font-semibold">20 гуртків, студій, клубів, спортивних секцій</strong>.
+                        </p>
+                    </div>
+
+                    <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-center">
+                        <h3 class="font-oswald text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-quote-left text-[#4b6496]"></i> Наше гасло
+                        </h3>
+                        <p class="text-slate-800 font-oswald text-lg sm:text-xl italic border-l-4 border-[#4b6496] pl-4 py-2 m-0 bg-slate-50 rounded-r-xl">
+                            «Навчаючи, розвивати й виховувати».
+                        </p>
+                    </div>
+                </div>
+            </section>
+        
+            <!-- MISSION & VISION SECTION -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <section class="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#394e77]/5 to-[#4b6496]/10 border border-[#4b6496]/20 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-[#4b6496] text-white flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-compass"></i>
+                            </div>
+                            <h2 class="font-oswald text-2xl font-bold text-[#394e77] m-0">Місія закладу</h2>
+                        </div>
+                        <p class="text-slate-700 text-sm sm:text-base leading-relaxed m-0">
+                            Формування всебічно розвиненої, освіченої, стратегічно мислячої, конкурентноздатної, гуманістично спрямованої особистості з почуттям національної свідомості, з громадською позицією, системою наукових знань; готової до суспільного самовизначення, орієнтованої на стале майбутнє та відповідні життєві цінності і пріоритети; особистості з творчим, перспективним мисленням, здатної знаходити нетрадиційні рішення в життєвих ситуаціях, що забезпечить її самовизначення та успіх у житті.
+                        </p>
+                    </div>
+                </section>
+        
+                <section class="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-amber-500/5 to-amber-500/10 border border-amber-500/20 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-eye"></i>
+                            </div>
+                            <h2 class="font-oswald text-2xl font-bold text-amber-800 m-0">Візія закладу</h2>
+                        </div>
+                        <p class="text-slate-700 text-sm sm:text-base leading-relaxed m-0">
+                            Створення сприятливого середовища та умов для забезпечення освіти для сталого (збалансованого) розвитку здобувачів освіти, що є новим етапом формування компонентів комплексної системи освіти, коли її складові стають рівнозначними.
+                        </p>
+                    </div>
+                </section>
+            </div>
+        
+            <!-- SUCCESS & RESULTS SECTION -->
+            <section class="mb-12 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+                <h3 class="font-oswald text-2xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-trophy text-amber-500"></i> Створення ситуації успіху
+                </h3>
+                <p class="text-slate-600 text-base leading-relaxed mb-6">
+                    Головне завдання та зміст діяльності кожного вчителя в нашому педагогічному колективі – створити для всіх вихованців <strong class="text-slate-900 font-semibold">ситуацію успіху</strong> – можливість пережити радість досягнення, усвідомити свої можливості, повірити в себе.
+                </p>
+
+                <h3 class="font-oswald text-xl font-bold text-slate-900 mb-4 border-b border-slate-100 pb-2">Результати</h3>
+                <ul class="space-y-3 text-slate-700 pl-0 list-none">
+                    <li class="flex items-start gap-3">
+                        <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs mt-0.5 flex-shrink-0">
+                            <i class="fa-solid fa-check"></i>
+                        </span>
+                        <span>Перемоги в <strong class="font-semibold text-slate-900">ІІ-ІІІ етапі Всеукраїнської олімпіади з базових дисциплін</strong>.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs mt-0.5 flex-shrink-0">
+                            <i class="fa-solid fa-check"></i>
+                        </span>
+                        <span>Перемоги в <strong class="font-semibold text-slate-900">І-ІІІ етапах Всеукраїнського конкурсу-захисту науково-дослідних робіт МАН «Дослідник»</strong>.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs mt-0.5 flex-shrink-0">
+                            <i class="fa-solid fa-check"></i>
+                        </span>
+                        <span>Перемоги в <strong class="font-semibold text-slate-900">Міжнародному конкурсі науково-технічної творчості молоді «INTEL ISEF»</strong> та інших інтелектуальних і творчих конкурсах.</span>
+                    </li>
+                </ul>
+            </section>
+        
+            <!-- FOOTER ANNOUNCEMENT CARD -->
+            <footer class="text-center p-6 sm:p-8 bg-gradient-to-r from-[#394e77] via-[#4b6496] to-[#2c3e50] rounded-2xl shadow-lg border border-indigo-900/20 text-white">
+                <p class="font-oswald text-lg sm:text-xl font-bold tracking-wide uppercase mb-2">
+                    В закладі плата за навчання відсутня
+                </p>
+                <p class="font-oswald text-lg sm:text-xl font-bold tracking-wide uppercase m-0 text-amber-300">
+                    Заклад освіти не надає платні додаткові послуги
+                </p>
+            </footer>
+
+        </article>
+    </div>
+</div>
+
+<style>
+    /* Декоративна лінія заголовків у стилі 201 (1).html */
+    .page-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background-color: #4b6496;
+        border-radius: 9999px;
+    }
+
+    /* Градієнтні кнопки з тінями */
+    .btn-gradient-shadow {
+        background-image: linear-gradient(135deg, #6366f1 0%, #4b6496 100%);
+        box-shadow: 0 4px 14px rgba(75, 100, 150, 0.35);
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-gradient-shadow:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(75, 100, 150, 0.45);
+    }
+</style>
 	<Footer />
 </Layout>

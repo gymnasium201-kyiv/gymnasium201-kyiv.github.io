@@ -1,17 +1,157 @@
-<div class="flex flex-wrap justify-center gap-3 md:gap-4 p-4 rounded-lg shadow-inner">
-    <a href="/informaciya_pro_zaklad/administration" class="px-6 py-3 text-base font-semibold rounded-full bg-[#4b6496] text-white hover:bg-[#3a4e76] transition duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
-        Адміністрація
-    </a>
-    <a href="/informaciya_pro_zaklad/educators" class="px-6 py-3 text-base font-semibold rounded-full bg-[#4b6496] text-white hover:bg-[#3a4e76] transition duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
-        Педагогічний колектив
-    </a>
-    <a href="/informaciya_pro_zaklad/innovacijna_ta_eksperimentaljna_diyaljnistj" class="px-6 py-3 text-base font-semibold rounded-full bg-[#4b6496] text-white hover:bg-[#3a4e76] transition duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
-        Іноваційна й експериментальна діяльність
-    </a>
-    <a href="/informaciya_pro_zaklad/kontakti" class="px-6 py-3 text-base font-semibold rounded-full bg-[#4b6496] text-white hover:bg-[#3a4e76] transition duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
-        Контакти
-    </a>
-    <a href="https://gymnasium201-dining.github.io" class="px-6 py-3 text-base font-semibold rounded-full bg-[#4b6496] text-white hover:bg-[#3a4e76] transition duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
-        Організація харчування в закладі
-    </a>
-</div>
+---
+// Отримання поточного URL для активного стану кнопок
+const currentPath = Astro.url.pathname;
+
+const menuItems = [
+  {
+    title: 'Адміністрація',
+    href: '/informaciya_pro_zaklad/administration',
+    icon: 'fa-solid fa-user-tie',
+    external: false
+  },
+  {
+    title: 'Педагогічний колектив',
+    href: '/informaciya_pro_zaklad/educators',
+    icon: 'fa-solid fa-chalkboard-user',
+    external: false
+  },
+  {
+    title: 'Інноваційна й експериментальна діяльність',
+    href: '/informaciya_pro_zaklad/innovacijna_ta_eksperimentaljna_diyaljnistj',
+    icon: 'fa-solid fa-flask',
+    external: false
+  },
+  {
+    title: 'Контакти',
+    href: '/informaciya_pro_zaklad/kontakti',
+    icon: 'fa-solid fa-address-book',
+    external: false
+  },
+  {
+    title: 'Організація харчування в закладі',
+    href: 'https://gymnasium201-dining.github.io',
+    icon: 'fa-solid fa-utensils',
+    external: true
+  }
+];
+---
+
+<nav aria-label="Підкатегорії розділу" class="my-6">
+  <div class="bg-white/80 backdrop-blur-md p-3 sm:p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+    
+    <!-- МОБІЛЬНЕ МЕНЮ (Показується на малого розміру екранах < md) -->
+    <div class="block md:hidden">
+      <button 
+        type="button"
+        id="subcategories-toggle-btn"
+        class="w-full flex items-center justify-between px-4 py-3 bg-slate-900 text-white rounded-xl font-oswald text-sm font-semibold shadow-md active:scale-[0.99] transition-all duration-200"
+        aria-expanded="false"
+        aria-controls="subcategories-mobile-list"
+      >
+        <span class="flex items-center gap-2.5">
+          <i class="fa-solid fa-layer-group text-amber-400"></i>
+          <span>Розділи</span>
+        </span>
+        <i id="subcategories-toggle-icon" class="fa-solid fa-chevron-down text-xs transition-transform duration-300 ml-2"></i>
+      </button>
+
+      <!-- Випадаючий список на мобільних -->
+      <div 
+        id="subcategories-mobile-list" 
+        class="hidden flex-col gap-2 mt-3 pt-3 border-t border-slate-200/80"
+      >
+        {menuItems.map((item) => {
+          const isActive = currentPath === item.href;
+          return (
+            <a
+              href={item.href}
+              target={item.external ? "_blank" : "_self"}
+              rel={item.external ? "noopener noreferrer" : undefined}
+              class={`flex items-center justify-between px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
+                isActive
+                  ? "bg-gradient-to-r from-indigo-600 to-[#4b6496] text-white shadow-sm"
+                  : "bg-slate-100 text-slate-700 hover:bg-[#4b6496] hover:text-white"
+              }`}
+            >
+              <span class="flex items-center gap-2.5">
+                <i class={`${item.icon} text-sm ${isActive ? "text-amber-300" : "text-[#4b6496]"}`}></i>
+                <span>{item.title}</span>
+              </span>
+              {item.external && (
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-70"></i>
+              )}
+            </a>
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- ДЕСКТОПНЕ МЕНЮ (Показується від md і вище) -->
+    <div class="hidden md:flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5">
+      {menuItems.map((item) => {
+        const isActive = currentPath === item.href;
+        return (
+          <a
+            href={item.href}
+            target={item.external ? "_blank" : "_self"}
+            rel={item.external ? "noopener noreferrer" : undefined}
+            class={`inline-flex items-center gap-2.5 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 ${
+              isActive
+                ? "bg-gradient-to-r from-indigo-600 to-[#4b6496] text-white shadow-md shadow-indigo-500/20 scale-[1.02]"
+                : "bg-slate-100/90 text-slate-700 hover:bg-[#4b6496] hover:text-white hover:shadow-md hover:-translate-y-0.5 border border-slate-200/60"
+            }`}
+          >
+            <i class={`${item.icon} text-sm ${isActive ? "text-amber-300" : "text-[#4b6496] group-hover:text-white transition-colors"}`}></i>
+            <span>{item.title}</span>
+            {item.external && (
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-70 ml-0.5"></i>
+            )}
+          </a>
+        );
+      })}
+    </div>
+
+  </div>
+</nav>
+
+<script>
+  // Скрипт відкриття/закриття меню підкатегорій на мобільних пристроях
+  document.addEventListener('astro:page-load', initSubcategoryMenu);
+  document.addEventListener('DOMContentLoaded', initSubcategoryMenu);
+
+  function initSubcategoryMenu() {
+    const toggleBtn = document.getElementById('subcategories-toggle-btn');
+    const mobileList = document.getElementById('subcategories-mobile-list');
+    const toggleIcon = document.getElementById('subcategories-toggle-icon');
+
+    if (toggleBtn && mobileList && toggleIcon) {
+      toggleBtn.replaceWith(toggleBtn.cloneNode(true));
+      const newToggleBtn = document.getElementById('subcategories-toggle-btn');
+      const newToggleIcon = document.getElementById('subcategories-toggle-icon');
+      const newMobileList = document.getElementById('subcategories-mobile-list');
+
+      newToggleBtn.addEventListener('click', () => {
+        const isHidden = newMobileList.classList.contains('hidden');
+        
+        if (isHidden) {
+          newMobileList.classList.remove('hidden');
+          newMobileList.classList.add('flex');
+          newToggleIcon.classList.add('rotate-180');
+          newToggleBtn.setAttribute('aria-expanded', 'true');
+        } else {
+          newMobileList.classList.add('hidden');
+          newMobileList.classList.remove('flex');
+          newToggleIcon.classList.remove('rotate-180');
+          newToggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+  }
+</script>
+
+<style>
+  /* Плаваючий ефект кольору іконок для десктопного меню */
+  a:not(.bg-gradient-to-r):hover i {
+    color: #ffffff !important;
+  }
+</style>

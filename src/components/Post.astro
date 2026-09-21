@@ -1,8 +1,9 @@
-<main id="main"></main>
+<main id="main" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12"></main>
+
 <!-- Image Enlargement Modal -->
-<div id="image-modal">
-    <span class="close-button" id="image_close_button">&times;</span>
-    <img id="enlarged-image" src="" alt="Enlarged Image" />
+<div id="image-modal" class="fixed inset-0 z-[9999] hidden bg-slate-900/80 backdrop-blur-sm items-center justify-center p-4 transition-opacity duration-300">
+    <button type="button" class="close-button absolute top-4 right-6 text-white/80 hover:text-white text-4xl font-light cursor-pointer transition-colors z-[10000]" id="image_close_button" aria-label="Закрити">&times;</button>
+    <img id="enlarged-image" src="" alt="Enlarged Image" class="max-w-[92%] max-h-[90vh] object-contain rounded-2xl shadow-2xl border border-white/20" />
 </div>
 
 <script>
@@ -11,6 +12,7 @@
     const params = new URLSearchParams(url.search);
     const search_id = params.get("post_id");
     var update_divs = false;
+
     fetch(
         "https://raw.githubusercontent.com/gymnasium201-kyiv/news-storage/refs/heads/main/news-storage/" +
             search_id +
@@ -20,92 +22,116 @@
         .then((data) => {
             var json = JSON.parse(data);
             var data_to_paste = "";
+            
+            // Main Article Container Card
             data_to_paste +=
-                '<body class="p-4 sm:p-6 lg:p-8"><div class="container mx-auto bg-white rounded-xl shadow-lg p-6 sm:p-8 lg:p-10 mb-8">';
+                '<article class="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 sm:p-8 lg:p-10 mb-8 overflow-hidden transition-all">';
+            
+            // Title
             data_to_paste +=
-                '<h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-4 text-center">' +
+                '<h1 class="font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight mb-4 text-center tracking-wide">' +
                 json["post_title"] +
                 "</h1>";
+            
+            // Date Badge
             data_to_paste +=
-                '<p class="text-gray-500 text-sm sm:text-base text-center mb-6">' +
-                "Опубліковано " +
+                '<div class="flex items-center justify-center gap-2 text-slate-500 font-oswald text-sm sm:text-base mb-8">' +
+                '<i class="fa-regular fa-calendar-alt text-brand-500"></i>' +
+                '<span>Опубліковано ' +
                 json["post_date"] +
-                "</p>";
+                "</span></div>";
+            
+            // Main Image & Text Section
             data_to_paste +=
-                '<div class="md:flex md:items-start md:space-x-8 mb-10"><div class="md:w-1/2 mb-8 md:mb-0 rounded-xl overflow-hidden shadow-md"><img src="' +
+                '<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-10"><div class="group relative overflow-hidden rounded-2xl shadow-md border border-slate-100 cursor-pointer"><img src="' +
                 "https://raw.githubusercontent.com/gymnasium201-kyiv/news-storage/refs/heads/main/news-storage/" +
                 search_id +
                 "/" +
                 json["main_image"] +
-                '" id="main_image" class="w-full h-auto object-cover rounded-xl"></div>';
+                '" id="main_image" class="w-full h-auto object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500"></div>';
+            
             data_to_paste +=
-                '<div class="md:w-1/2 prose prose-lg text-gray-700 leading-relaxed mx-auto md:mx-0">' +
+                '<div class="prose prose-slate text-slate-700 leading-relaxed text-base sm:text-lg whitespace-pre-line">' +
                 json["post_text"][0] +
                 "</div></div>";
-            if (json["post_images"].length > 0) {
+
+            // Image Gallery Section
+            if (json["post_images"] && json["post_images"].length > 0) {
                 data_to_paste +=
-                    '<h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Інші фото:</h2><div class="slideshow-container relative w-full h-auto mb-10 bg-gray-100 p-4">';
+                    '<div class="pt-8 border-t border-slate-100 mb-10"><h2 class="font-oswald text-2xl sm:text-3xl font-bold text-slate-800 mb-6 text-center flex items-center justify-center gap-2"><i class="fa-regular fa-images text-brand-500"></i> Фотогалерея</h2><div class="slideshow-container relative w-full rounded-2xl overflow-hidden bg-slate-950/5 border border-slate-200/60 p-2 sm:p-4 shadow-inner">';
+                
                 if (json["post_images"].length > 1) {
                     var j = 0;
                     data_to_paste +=
-                        "<a class='prev' id='image_left_slide'>&#10094;</a><a class='next' id='image_right_slide'>&#10095;</a>";
+                        '<button type="button" class="prev font-semibold" id="image_left_slide" aria-label="Попереднє фото">&#10094;</button><button type="button" class="next font-semibold" id="image_right_slide" aria-label="Наступне фото">&#10095;</button>';
                     while (j < json["post_images"].length) {
                         data_to_paste +=
-                            '<div class="myImageSlides image-slides fade"><img src="' +
+                            '<div class="myImageSlides image-slides fade cursor-pointer"><img src="' +
                             "https://raw.githubusercontent.com/gymnasium201-kyiv/news-storage/refs/heads/main/news-storage/" +
                             search_id +
                             "/" +
                             json["post_images"][j] +
-                            '" class="rounded-lg shadow-md"></div>';
+                            '" class="rounded-xl shadow-md mx-auto max-h-[500px] object-contain"></div>';
                         j += 1;
                     }
                 } else {
                     data_to_paste +=
-                        '<div class="myImageSlides image-slides fade"><img src="' +
+                        '<div class="myImageSlides image-slides fade cursor-pointer"><img src="' +
                         "https://raw.githubusercontent.com/gymnasium201-kyiv/news-storage/refs/heads/main/news-storage/" +
                         search_id +
                         "/" +
                         json["post_images"][0] +
-                        '" class="rounded-lg shadow-md"></div>';
+                        '" class="rounded-xl shadow-md mx-auto max-h-[500px] object-contain"></div>';
                 }
-                data_to_paste += "</div>";
+                data_to_paste += "</div></div>";
             }
-            if (json["post_documents"].length > 0) {
+
+            // Attached Documents Section
+            if (json["post_documents"] && json["post_documents"].length > 0) {
                 data_to_paste +=
-                    '<h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Прикріплені файли:</h2><div class="overflow-x-auto rounded-lg shadow-md mb-10"><table class="min-w-full bg-white border-collapse"><thead><tr class="bg-teal-400 text-white"><th class="py-3 px-4 text-left text-sm font-semibold uppercase tracking-wider rounded-tl-lg">Назва файлу</th><th class="py-3 px-4 text-left text-sm font-semibold uppercase tracking-wider rounded-tr-lg">Посилання на завантаження</th></tr></thead>';
-                data_to_paste += "<tbody>";
+                    '<div class="pt-8 border-t border-slate-100 mb-10"><h2 class="font-oswald text-2xl sm:text-3xl font-bold text-slate-800 mb-6 text-center flex items-center justify-center gap-2"><i class="fa-solid fa-paperclip text-brand-500"></i> Прикріплені файли</h2><div class="overflow-x-auto rounded-2xl shadow-sm border border-slate-200"><table class="min-w-full bg-white divide-y divide-slate-200"><thead class="bg-slate-800 text-white"><tr><th class="py-3.5 px-6 text-left text-xs sm:text-sm font-semibold uppercase tracking-wider">Назва файлу</th><th class="py-3.5 px-6 text-right text-xs sm:text-sm font-semibold uppercase tracking-wider">Дія</th></tr></thead><tbody class="divide-y divide-slate-100">';
+                
                 var j = 0;
                 while (j < json["post_documents"].length) {
                     data_to_paste +=
-                        '<tr class="border-b border-gray-200 hover:bg-gray-50"><td class="py-3 px-4 text-gray-800">' +
+                        '<tr class="hover:bg-slate-50/80 transition-colors"><td class="py-4 px-6 text-slate-800 text-sm sm:text-base font-medium flex items-center gap-2"><i class="fa-regular fa-file-lines text-slate-400"></i> ' +
                         json["post_documents"][j] +
-                        '</td><td class="py-3 px-4"><a href="' +
+                        '</td><td class="py-4 px-6 text-right"><a href="' +
                         "https://raw.githubusercontent.com/gymnasium201-kyiv/news-storage/refs/heads/main/news-storage/" +
                         search_id +
                         "/" +
                         json["post_documents"][j] +
-                        '" class="text-indigo-600 hover:text-indigo-800 font-medium">Завантажити</a></td></tr>';
+                        '" class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-brand-600 hover:text-brand-800 bg-brand-50 hover:bg-brand-100 px-3.5 py-1.5 rounded-xl transition-all" download><i class="fa-solid fa-download"></i> Завантажити</a></td></tr>';
                     j += 1;
                 }
-                data_to_paste += "</tbody></table></div>";
+                data_to_paste += "</tbody></table></div></div>";
             }
-            if (json["post_videos"].length > 0) {
+
+            // Attached Videos Section
+            if (json["post_videos"] && json["post_videos"].length > 0) {
                 data_to_paste +=
-                    '<h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Прикріплені відео:</h2><div class="slideshow-container relative w-full h-auto bg-gray-100 p-4">';
+                    '<div class="pt-8 border-t border-slate-100"><h2 class="font-oswald text-2xl sm:text-3xl font-bold text-slate-800 mb-6 text-center flex items-center justify-center gap-2"><i class="fa-solid fa-circle-play text-brand-500"></i> Відеоматеріали</h2><div class="slideshow-container relative w-full rounded-2xl overflow-hidden bg-slate-950/5 border border-slate-200/60 p-2 sm:p-4 shadow-inner">';
+                
                 data_to_paste +=
-                    "<a class='prev' id='video_left_slide'>&#10094;</a><a class='next' id='video_right_slide'>&#10095;</a>";
+                    '<button type="button" class="prev font-semibold" id="video_left_slide" aria-label="Попереднє відео">&#10094;</button><button type="button" class="next font-semibold" id="video_right_slide" aria-label="Наступне відео">&#10095;</button>';
+                
                 var j = 0;
                 while (j < json["post_videos"].length) {
                     data_to_paste +=
-                        '<div class="myVideoSlides video-slides fade"><div class="video-responsive-wrapper" style="padding-top: 56.25%;"><iframe class="absolute top-0 left-0 w-full h-full rounded-lg shadow-md" src="' +
+                        '<div class="myVideoSlides video-slides fade"><div class="video-responsive-wrapper rounded-xl overflow-hidden shadow-md"><iframe class="absolute top-0 left-0 w-full h-full rounded-xl" src="' +
                         json["post_videos"][j] +
-                        '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen> </iframe></div></div>';
+                        '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>';
                     j += 1;
                 }
-                data_to_paste += "</div>";
+                data_to_paste += "</div></div>";
             }
+
+            data_to_paste += "</article>";
+
             var main_area = document.getElementById("main");
-            main_area!.innerHTML += data_to_paste;
+            if (main_area) {
+                main_area.innerHTML += data_to_paste;
+            }
         });
 
     var slideImageIndex = 1;
@@ -133,7 +159,9 @@
         for (i = 0; i < x.length; i++) {
             x[i].style.display = "none";
         }
-        x[slideImageIndex - 1].style.display = "block";
+        if (x[slideImageIndex - 1]) {
+            x[slideImageIndex - 1].style.display = "block";
+        }
     }
 
     function showVideoDivs(n: number) {
@@ -150,278 +178,194 @@
         for (i = 0; i < x.length; i++) {
             x[i].style.display = "none";
         }
-        x[slideVideoIndex - 1].style.display = "block";
+        if (x[slideVideoIndex - 1]) {
+            x[slideVideoIndex - 1].style.display = "block";
+        }
     }
 
     // Functions for image enlargement modal
-    function openImageModal(imgSrc) {
+    function openImageModal(imgSrc: string) {
         const modal = document.getElementById("image-modal");
-        const enlargedImage = document.getElementById("enlarged-image");
-        enlargedImage.src = imgSrc;
-        modal.classList.add("active"); // Show the modal
-        document.body.style.overflow = "hidden"; // Prevent scrolling of the background
+        const enlargedImage = document.getElementById("enlarged-image") as HTMLImageElement;
+        if (modal && enlargedImage) {
+            enlargedImage.src = imgSrc;
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+            document.body.style.overflow = "hidden";
+        }
     }
 
     function closeImageModal() {
         const modal = document.getElementById("image-modal");
-        modal.classList.remove("active"); // Hide the modal
-        document.body.style.overflow = "auto"; // Restore scrolling of the background
+        if (modal) {
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+            document.body.style.overflow = "auto";
+        }
     }
 
     var main_element = document.getElementById("main");
-    var observer = new MutationObserver(function (mutationsList, observer) {
-        var image_slideshow_there = document.getElementById("image_left_slide");
-        if (image_slideshow_there != null) {
-            var leftSlideButton = document.getElementById("image_left_slide")!;
-            leftSlideButton.addEventListener("click", function () {
-                plusImageDivs(-1);
+    if (main_element) {
+        var observer = new MutationObserver(function (mutationsList, observer) {
+            var image_slideshow_there = document.getElementById("image_left_slide");
+            if (image_slideshow_there != null) {
+                var leftSlideButton = document.getElementById("image_left_slide")!;
+                leftSlideButton.addEventListener("click", function () {
+                    plusImageDivs(-1);
+                });
+
+                var rightSlideButton = document.getElementById("image_right_slide")!;
+                rightSlideButton.addEventListener("click", function () {
+                    plusImageDivs(+1);
+                });
+            }
+
+            var video_slideshow_there = document.getElementById("video_left_slide");
+            if (video_slideshow_there != null) {
+                var leftSlideButton = document.getElementById("video_left_slide")!;
+                leftSlideButton.addEventListener("click", function () {
+                    plusVideoDivs(-1);
+                });
+
+                var rightSlideButton = document.getElementById("video_right_slide")!;
+                rightSlideButton.addEventListener("click", function () {
+                    plusVideoDivs(+1);
+                });
+            }
+
+            document
+                .getElementById("main_image")
+                ?.addEventListener("click", function (this: HTMLImageElement) {
+                    openImageModal(this.src);
+                });
+
+            // Attach click listener to all images in the 'image-slides' slideshow
+            const slideshowImages = document.querySelectorAll(".image-slides img");
+            slideshowImages.forEach((img) => {
+                img.addEventListener("click", function (this: HTMLImageElement) {
+                    openImageModal(this.src);
+                });
             });
 
-            var rightSlideButton =
-                document.getElementById("image_right_slide")!;
-            rightSlideButton.addEventListener("click", function () {
-                plusImageDivs(+1);
-            });
-        }
+            // Close modal if clicking on the overlay itself
+            document
+                .getElementById("image-modal")
+                ?.addEventListener("click", function (event) {
+                    if (event.target === this) {
+                        closeImageModal();
+                    }
+                });
 
-        var video_slideshow_there = document.getElementById("video_left_slide");
-        if (video_slideshow_there != null) {
-            var leftSlideButton = document.getElementById("video_left_slide")!;
-            leftSlideButton.addEventListener("click", function () {
-                plusVideoDivs(-1);
-            });
-
-            var rightSlideButton =
-                document.getElementById("video_right_slide")!;
-            rightSlideButton.addEventListener("click", function () {
-                plusVideoDivs(+1);
-            });
-        }
-
-        document
-            .getElementById("main_image")
-            ?.addEventListener("click", function () {
-                openImageModal(this.src);
-            });
-
-        // Attach click listener to all images in the 'image-slides' slideshow
-        const slideshowImages = document.querySelectorAll(".image-slides img");
-        slideshowImages.forEach((img) => {
-            img.addEventListener("click", function () {
-                openImageModal(this.src);
-            });
-        });
-
-        // Close modal if clicking on the overlay itself
-        document
-            .getElementById("image-modal")
-            .addEventListener("click", function (event) {
-                if (event.target === this) {
-                    // Check if the click was on the modal overlay, not its children
+            document
+                .getElementById("image_close_button")
+                ?.addEventListener("click", function () {
                     closeImageModal();
-                }
-            });
+                });
 
-        document
-            .getElementById("image_close_button")
-            ?.addEventListener("click", function () {
-                closeImageModal();
-            });
-
-        var any_video_there = document.getElementsByClassName(
-            "myVideoSlides",
-        ) as HTMLCollectionOf<HTMLElement>;
-        if (any_video_there.length > 0) {
-            showVideoDivs(slideVideoIndex);
-        }
+            var any_video_there = document.getElementsByClassName(
+                "myVideoSlides",
+            ) as HTMLCollectionOf<HTMLElement>;
+            if (any_video_there.length > 0) {
+                showVideoDivs(slideVideoIndex);
+            }
+            
+            var any_image_there = document.getElementsByClassName(
+                "myImageSlides",
+            ) as HTMLCollectionOf<HTMLElement>;
+            if (any_image_there.length > 0) {
+                showImageDivs(slideImageIndex);
+            }
+        });
         
-        var any_image_there = document.getElementsByClassName(
-            "myImageSlides",
-        ) as HTMLCollectionOf<HTMLElement>;
-        if (any_image_there.length > 0) {
-            showImageDivs(slideImageIndex);
+        observer.observe(main_element, {
+            characterData: false,
+            childList: true,
+            attributes: false,
+        });
+    }
+
+    // Close Modal on ESC key press
+    document.addEventListener("keydown", function(e) {
+        if (e.key === "Escape") {
+            closeImageModal();
         }
-    });
-    observer.observe(main_element, {
-        characterData: false,
-        childList: true,
-        attributes: false,
     });
 </script>
 
 <style is:global>
-    body {
-        font-family: "Open Sans", sans-serif;
-        background-color: #f3f4f6; /* Light gray background */
-        font-size: larger;
-    }
-    .container {
-        margin-top: 25px;
-    }
+    /* Global Styles & Animations */
     .slideshow-container {
         position: relative;
         max-width: 100%;
-        overflow: hidden;
-        border-radius: 0.75rem; /* rounded-xl */
     }
-    .myImageSlides {
-        display: none;
-        width: 100%;
-    }
+    .myImageSlides,
     .myVideoSlides {
         display: none;
         width: 100%;
     }
-    /* Styling for images within slideshows */
-    .myImageSlides img {
-        width: 100%; /* Ensure image takes full width of its slide container */
-        height: auto; /* Maintain aspect ratio based on width */
-        max-height: 400px; /* Limit the maximum height of images in slideshow */
-        object-fit: contain; /* Scale image down to fit within the content box, maintaining aspect ratio */
-        display: block;
-        border-radius: 0.75rem; /* rounded-xl */
-        margin: 0 auto; /* Center the image horizontally */
-    }
-    /* Styling for iframes (videos) within slideshows */
-    .myVideoSlides iframe {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: 0.75rem; /* rounded-xl */
-    }
-    /* Next & previous buttons */
+    
+    /* Navigation Arrows for Slideshows */
     .prev,
     .next {
         cursor: pointer;
         position: absolute;
         top: 50%;
-        width: auto;
-        padding: 16px;
-        margin-top: -22px;
+        transform: translateY(-50%);
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: justify;
+        justify-content: center;
+        align-items: center;
         color: white;
-        font-weight: bold;
-        font-size: 18px;
-        transition: 0.6s ease;
-        border-radius: 0 3px 3px 0;
+        font-size: 16px;
+        transition: all 0.25s ease;
+        border-radius: 9999px;
         user-select: none;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(4px);
         z-index: 10;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
-    /* Position the "next button" to the right */
+    .prev {
+        left: 12px;
+    }
     .next {
-        right: 0;
-        border-radius: 3px 0 0 3px;
+        right: 12px;
     }
-    /* On hover, add a black background with a little more opacity */
     .prev:hover,
     .next:hover {
-        background-color: rgba(0, 0, 0, 0.8);
+        background-color: rgba(75, 100, 150, 0.95);
+        transform: translateY(-50%) scale(1.08);
     }
-    /* Caption text */
-    .text {
-        color: #f2f2f2;
-        font-size: 15px;
-        padding: 8px 12px;
-        position: absolute;
-        bottom: 8px;
-        width: 100%;
-        text-align: center;
-    }
-    /* Number text (1/3 etc) */
-    .numbertext {
-        color: #f2f2f2;
-        font-size: 12px;
-        padding: 8px 12px;
-        position: absolute;
-        top: 0;
-    }
-    /* The dots/bullets/indicators */
-    .dot {
-        cursor: pointer;
-        height: 15px;
-        width: 15px;
-        margin: 0 2px;
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.6s ease;
-    }
-    .active,
-    .dot:hover {
-        background-color: #717171;
-    }
-    /* Fading animation */
+
+    /* Fade Animation */
     .fade {
         animation-name: fade;
-        animation-duration: 1.5s;
+        animation-duration: 0.4s;
     }
     @keyframes fade {
         from {
-            opacity: 0.4;
+            opacity: 0.5;
         }
         to {
             opacity: 1;
         }
     }
 
-    /* Styles for the image enlargement modal */
-    #image-modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.75); /* Dark overlay */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999; /* Ensure it's on top of everything */
-        /* hidden by default, controlled by JS */
-        display: none;
-    }
-
-    #image-modal.active {
-        display: flex;
-    }
-
-    #image-modal #enlarged-image {
-        max-width: 90%;
-        max-height: 90%;
-        object-fit: contain; /* Ensure the image fits within the modal */
-        border-radius: 0.75rem; /* rounded-xl */
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-    }
-
-    #image-modal .close-button {
-        position: absolute;
-        top: 20px;
-        right: 30px;
-        color: white;
-        font-size: 50px;
-        font-weight: bold;
-        cursor: pointer;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        z-index: 10000; /* Ensure button is above image */
-    }
-
-    /* Styling for the responsive video wrapper, ensuring a minimum height */
+    /* Video Aspect Ratio Box */
     .video-responsive-wrapper {
         position: relative;
         width: 100%;
-        /* The padding-top defines the aspect ratio for responsive videos */
-        padding-top: 56.25%; /* 16:9 Aspect Ratio (height / width) */
-        /* Add min-height to prevent the video from becoming too small */
-        min-height: 200px; /* Adjust this value as needed for desired minimum size */
+        padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        min-height: 220px;
         overflow: hidden;
-        border-radius: 0.75rem;
     }
-
     .video-responsive-wrapper iframe {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%; /* Make iframe fill its parent's dimensions */
-        border-radius: 0.75rem;
+        height: 100%;
     }
 </style>

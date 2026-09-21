@@ -5,6 +5,6 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://gymnasium201-kyiv.github.io',
+  site: 'https://gymnasium201-kyiv.github.io/temp',
   integrations: [tailwind()]
 })

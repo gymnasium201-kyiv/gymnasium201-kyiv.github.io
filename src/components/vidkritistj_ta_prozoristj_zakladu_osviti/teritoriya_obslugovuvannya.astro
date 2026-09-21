@@ -1,43 +1,101 @@
 ---
-import schoollogo from "../assets/logo.jpg";
+import Layout from '../layouts/Layout.astro'; // Якщо у вас використовується спійний Layout
 ---
 
-<div class="flex-grow container mx-auto p-4">
-        <div class="w-full bg-white p-6 rounded-lg shadow-md">
-            <article>
-				<h3 class="text-xl font-semibold text-center mb-4 text-[#4b6496]">
+<div class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 font-inter">
+    <!-- Заголовок сторінки у стилі нового дизайну -->
+    <div class="text-center mb-10">
+        <h1 class="page-title font-oswald text-3xl sm:text-4xl font-bold text-slate-800 relative pb-4 inline-block tracking-wide">
+            <i class="fa-solid fa-map-location-dot text-brand-500 mr-2"></i>Територія обслуговування
+        </h1>
+        <p class="text-slate-500 text-sm sm:text-base mt-2 max-w-2xl mx-auto">
+            Закріплена територія обслуговування Гімназії №201 м. Києва відповідно до розпорядження Дніпровської районної в місті Києві державної адміністрації.
+        </p>
+    </div>
 
-					Для перегляду натисніть на зображення
-			
-				</h3>
-			
-			
-			
-				<a href="https://www.google.com/maps/d/viewer?mid=1mfQSOksPJPjgbn_eY_voXNmfBo-t_3R2&ll=50.47578083791639%2C30.607436453271475&z=13" title="Для перегляду натисніть на зображення (у новому вікні)" target="_blank" class="block w-full cursor-pointer">
-			
-					<p class="text-center">
-			
-						<span class="inline-block relative group">
-			
-							<img alt="/Files/images/Location.jpg" src="https://github.com/gymnasium201-kyiv/gymnasium201-kyiv.github.io/blob/main/public/vidkritistj_ta_prozoristj_zakladu_osviti/teritoriya_obslugovuvannya.jpg?raw=true" class="max-w-full h-auto rounded-lg shadow-md transition-shadow duration-300 group-hover:shadow-xl" />
-			
-							<span class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity rounded-lg"></span>
-			
-						</span>
-			
-					</p>
-			
-				</a>
-            </article>
+    <!-- Основний блок із карткою та інтерактивною мапою -->
+    <div class="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden">
+        
+        <!-- Верхній блок підказки та інфо-картки -->
+        <div class="p-6 sm:p-8 bg-gradient-to-r from-slate-50 to-brand-50/30 border-b border-slate-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-600 flex items-center justify-center flex-shrink-0 text-lg">
+                    <i class="fa-solid fa-circle-info"></i>
+                </div>
+                <div>
+                    <h2 class="font-oswald text-lg sm:text-xl font-bold text-slate-800">Інтерактивна карта закріпленої території</h2>
+                    <p class="text-xs sm:text-sm text-slate-600">
+                        Ви можете масштабувати мапу, переглядати межі району та переходити до окремих вулиць безпосередньо на цій сторінці.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Кнопка відкриття в окремому вікні -->
+            <a href="https://www.google.com/maps/d/viewer?mid=1mfQSOksPJPjgbn_eY_voXNmfBo-t_3R2&ll=50.47088235387703%2C30.602054722946015&z=16" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="btn-gradient-shadow text-white text-xs sm:text-sm font-medium py-2.5 px-5 rounded-xl flex items-center gap-2 whitespace-nowrap self-stretch md:self-auto justify-center">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                <span>Відкрити на весь екран</span>
+            </a>
+        </div>
+
+        <!-- Вбудована мапа (Embedded Google My Maps) -->
+        <div class="relative w-full h-[500px] sm:h-[600px] bg-slate-100">
+            <iframe 
+                src="https://www.google.com/maps/d/embed?mid=1mfQSOksPJPjgbn_eY_voXNmfBo-t_3R2&ll=50.47088235387703%2C30.602054722946015&z=16" 
+                class="w-full h-full border-0" 
+                allowfullscreen="" 
+                loading="lazy"
+                title="Територія обслуговування Гімназії №201">
+            </iframe>
+        </div>
+
+        <!-- Нижня додаткова картка з роз'ясненнями -->
+        <div class="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 bg-white">
+            <div class="border border-slate-100 rounded-xl p-5 bg-slate-50/50">
+                <h3 class="font-oswald text-base font-bold text-slate-800 mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-child-reaching text-brand-500"></i> Першочергове зарахування
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Діти, які проживають на території обслуговування гімназії, мають право на першочергове зарахування до 1-го класу.
+                </p>
+            </div>
+
+            <div class="border border-slate-100 rounded-xl p-5 bg-slate-50/50">
+                <h3 class="font-oswald text-base font-bold text-slate-800 mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-file-signature text-brand-500"></i> Підтвердження місця проживання
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Для підтвердження території проживання батьки можуть надати один із документів, визначених Порядком зарахування учнів.
+                </p>
+            </div>
         </div>
     </div>
 </div>
 
 <style>
-    /* Застосування шрифту Inter до всього тіла документа */
-    body {
-        font-family: "Open Sans", sans-serif;
-        background-color: #f3f4f6; /* Light gray background */
-        font-size: larger;
+    /* Стиль декоративної лінії для заголовка */
+    .page-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background-color: #4b6496;
+        border-radius: 9999px;
+    }
+
+    /* Градієнтна градієнтна кнопка у фірмовому стилі гімназії */
+    .btn-gradient-shadow {
+        background-image: linear-gradient(135deg, #6366f1 0%, #4b6496 100%);
+        box-shadow: 0 4px 14px rgba(75, 100, 150, 0.35);
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-gradient-shadow:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(75, 100, 150, 0.45);
     }
 </style>

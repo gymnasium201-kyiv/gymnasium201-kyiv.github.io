@@ -1,28 +1,186 @@
 ---
-import schoollogo from "../assets/logo.jpg";
+// Фронтматер залишаємо чистим без відносних імпортів файлів, що можуть спричинити помилки збірки
 ---
 
-<div class="flex-grow container mx-auto p-4">
-        <div class="w-full bg-white p-6 rounded-lg shadow-md">
-            <article>
-                <h1 style="color: rgb(75, 100, 150);" class="text-2xl md:text-3xl font-bold text-center mb-2 text-gray-800">До квітня 2025 року гімназія №201 була СЗШ№201 м. Києва.</h1>
-                <h1 style="color: rgb(75, 100, 150);" class="text-xl md:text-2xl font-semibold text-center mb-6 text-indigo-700"><strong>Середня загальноосвітня школа I-III ступенів №201 заснована у 1971 році.</strong></h1>
-                <p class="flex justify-center mb-8">
-                    <span class="block max-w-lg overflow-hidden rounded-lg shadow-md">
-                        <img alt="/Files/images/storya_shkoli/іст на сайт.jpg" src="https://github.com/gymnasium201-kyiv/gymnasium201-kyiv.github.io/blob/main/public/istoriya_shkoli/istoriya_shkoli.jpg?raw=true" style="cursor: pointer;" class="max-w-full h-auto transition duration-300 ease-in-out hover:opacity-90">
-                        <span class=""></span>
-                    </span>
-                </p>
-            </article>
-        </div>
-    </div>
-</div>
+<html lang="uk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Історія гімназії — Гімназія №201 м. Києва</title>
+    
+    <!-- Google Fonts: Oswald & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="font-inter bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
-<style>
-    /* Застосування шрифту Inter до всього тіла документа */
-    body {
-        font-family: "Open Sans", sans-serif;
-        background-color: #f3f4f6; /* Light gray background */
-        font-size: larger;
-    }
-</style>
+    <!-- HERO / HEADER SECTION -->
+    <header class="relative bg-gradient-to-br from-[#394e77] via-[#4b6496] to-[#2c3e50] text-white overflow-hidden shadow-lg border-b border-indigo-900/20">
+        <!-- Floating Icons Animation -->
+        <div class="animated-background absolute inset-0 overflow-hidden pointer-events-none z-0">
+            <div class="pop-item item-1 text-4xl text-white/30"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="pop-item item-2 text-3xl text-white/30"><i class="fa-solid fa-book-open"></i></div>
+            <div class="pop-item item-3 text-4xl text-white/30"><i class="fa-solid fa-landmark"></i></div>
+            <div class="pop-item item-4 text-3xl text-white/30"><i class="fa-solid fa-award"></i></div>
+            <div class="pop-item item-5 text-4xl text-white/30"><i class="fa-solid fa-clock-rotate-left"></i></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 py-12 md:py-16 text-center">
+            <span class="inline-flex items-center gap-2 bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4">
+                <i class="fa-solid fa-landmark"></i> Гордість та традиції
+            </span>
+            <h1 class="font-oswald text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white drop-shadow-md leading-tight mb-4">
+                Історія Гімназії №201
+            </h1>
+            <p class="text-slate-200 font-light text-base sm:text-lg max-w-2xl mx-auto">
+                Понад півстоліття освітніх традицій, виховання поколінь та постійного розвитку в серці Дніпровського району міста Києва.
+            </p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <!-- HIGHLIGHTED BANNER CARD -->
+        <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden mb-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+                <div class="lg:col-span-7 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 text-brand-500 font-oswald text-sm font-bold uppercase tracking-wider mb-2">
+                            <i class="fa-solid fa-calendar-check"></i> Ключова подія
+                        </div>
+                        <h2 class="font-oswald text-2xl sm:text-3xl font-bold text-slate-900 mb-4 leading-snug">
+                            Заснування та Новий Етап Розвитку
+                        </h2>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-4">
+                            Середня загальноосвітня школа I-III ступенів №201 була заснована у <strong class="text-slate-800">1971 році</strong>. Протягом понад 50 років навчальний заклад є осередком якісної освіти та гармонійного розвитку шкільної молоді Дніпровського району м. Києва.
+                        </p>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                            У <strong class="text-slate-800">квітні 2025 року</strong> СЗШ №201 офіційно змінила свій статус і була реорганізована в <strong class="text-indigo-700">Гімназію №201 м. Києва</strong>, розпочавши нову сторінку сучасної інноваційної освіти.
+                        </p>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-slate-100 flex flex-wrap items-center gap-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-slate-100 text-[#4b6496] flex items-center justify-center font-bold text-lg">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400">Адреса закладу</div>
+                                <div class="text-xs sm:text-sm font-semibold text-slate-700">просп. Воскресенський, 14-А, м. Київ</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIMELINE SECTION -->
+        <section class="mb-14">
+            <div class="page-title-container text-center mb-10">
+                <h2 class="page-title font-oswald text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-800 relative pb-4 inline-block tracking-wide">
+                    Вехи історії закладу
+                </h2>
+                <p class="text-slate-500 text-xs sm:text-sm mt-2">Основні етапи становлення та трансформації</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Timeline Card 1 -->
+                <div class="bg-white rounded-2xl p-6 shadow-md border border-slate-100 hover:shadow-xl transition duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-amber-500/10 text-amber-600 font-oswald text-xl font-bold rounded-xl flex items-center justify-center mb-4">
+                            1971
+                        </div>
+                        <h3 class="font-oswald text-xl font-bold text-slate-800 mb-2">Заснування школи</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Відкриття Середньої загальноосвітньої школи №201 у Дніпровському районі міста Києва. Формування першого педагогічного колективу та закладення навчальних традицій.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline Card 2 -->
+                <div class="bg-white rounded-2xl p-6 shadow-md border border-slate-100 hover:shadow-xl transition duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-indigo-500/10 text-[#4b6496] font-oswald text-xl font-bold rounded-xl flex items-center justify-center mb-4">
+                            2000
+                        </div>
+                        <h3 class="font-oswald text-xl font-bold text-slate-800 mb-2">Модернізація та ріст</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Впровадження новітніх освітніх стандартів, розширення матеріально-технічної бази, високі результати учнів у міських олімпіадах та спортивних змаганнях.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline Card 3 -->
+                <div class="bg-white rounded-2xl p-6 shadow-md border border-slate-100 hover:shadow-xl transition duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-emerald-500/10 text-emerald-600 font-oswald text-xl font-bold rounded-xl flex items-center justify-center mb-4">
+                            2025
+                        </div>
+                        <h3 class="font-oswald text-xl font-bold text-slate-800 mb-2">Статус Гімназії №201</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Офіційна реорганізація в Гімназію №201 м. Києва. Перехід на нові інноваційні стандарти НУШ, цифровізація освітнього простору та забезпечення безпеки школярів.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <style>
+        .page-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #4b6496;
+            border-radius: 9999px;
+        }
+
+        .pop-item {
+            position: absolute;
+            opacity: 0;
+            animation: popAndFloat 8s linear infinite;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        @keyframes popAndFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.6) rotate(0deg);
+            }
+            15% {
+                opacity: 0.35;
+                transform: translateY(-15px) scale(1.1) rotate(10deg);
+            }
+            50% {
+                opacity: 0.25;
+                transform: translateY(-50px) scale(1) rotate(-10deg);
+            }
+            85% {
+                opacity: 0.15;
+                transform: translateY(-100px) scale(0.9) rotate(15deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-140px) scale(0.7) rotate(30deg);
+            }
+        }
+
+        .item-1 { left: 8%; bottom: -10px; animation-duration: 7s; animation-delay: 0s; }
+        .item-2 { left: 28%; bottom: -10px; animation-duration: 9s; animation-delay: 2.2s; }
+        .item-3 { left: 58%; bottom: -10px; animation-duration: 6.5s; animation-delay: 4.1s; }
+        .item-4 { left: 78%; bottom: -10px; animation-duration: 8.5s; animation-delay: 1.2s; }
+        .item-5 { left: 92%; bottom: -10px; animation-duration: 10s; animation-delay: 5s; }
+    </style>
+</body>
+</html>

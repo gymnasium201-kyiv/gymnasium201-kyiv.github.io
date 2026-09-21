@@ -2,83 +2,141 @@
 import schoollogo from "../assets/logo.jpg";
 ---
 
-<div class="flex-grow container mx-auto p-4">
-        <div class="w-full bg-white p-6 rounded-lg shadow-md">
-            <article>
-				<h1 class="text-3xl font-bold text-center mb-6 text-[#4b6496]">
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 font-inter">
+    
+    <!-- PAGE TITLE SECTION -->
+    <div class="text-center mb-10">
+        <h1 class="page-title font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-800 relative pb-4 inline-block tracking-wide">
+            <i class="fa-solid fa-graduation-cap text-brand-500 mr-2"></i>Діючі освітні програми 2026-2027 н.р.
+        </h1>
+        <p class="text-slate-500 text-sm sm:text-base mt-3 max-w-2xl mx-auto">
+            Нормативні документи та навчальні програми, за якими здійснюється освітній процес у Гімназії №201
+        </p>
+    </div>
 
-					<br> Діючі освітні програми 2025-2026 н.р.<br> <br>
-			
-				</h1>
-			
-
-				<p class="mx-auto p-4 text-xl font-bold pt-4">
-					1-8 класи працюють за програмою НУШ, у 9 класах упроваджується розвивальне навчання за науково-педагогічними проектами «Росток» та «Інтелект України».
-				</p>
-				
-			
-				<div class="space-y-4">
-			
-					<h3 class="text-xl font-semibold">
-			
-						ОСВІТНЯ ПРОГРАМА на 2025-2026 навчальний рік 
-			
-						<a href="http://drive.google.com/file/d/1jcu6CVtb63cUDaziHDrbQ28k-bvV764e/view?usp=sharing" target="_blank" title=" (у новому вікні)" class="text-[#4b6496] hover:text-[rgb(50, 75, 125)] underline transition duration-150">завантажити</a>
-			
-					</h3>
-			
-					<a href="http://drive.google.com/file/d/1jcu6CVtb63cUDaziHDrbQ28k-bvV764e/view?usp=sharing" title=" (у новому вікні)" class="hidden"></a>
-			
-					<h2 class="text-lg font-bold text-[#4b6496]">
-			
-						<a href="http://mon.gov.ua/osvita-2/zagalna-serednya-osvita/osvitni-programi/modelni-navchalni-programi-dlya-5-9-klasiv-novoi-ukrainskoi-shkoli-zaprovadzhuyutsya-poetapno-z-2022-roku" target="_blank" title=" (у новому вікні)" class="text-[rgb(75, 100, 150)] hover:text-[rgb(50, 75, 125)] transition duration-150">
-			
-							Навчальні програми з окремих предметів для 5-8 класів (НУШ)
-			
-						</a>
-			
-					</h2>
-			
-					
-			
-					<h2 class="text-lg font-bold text-[#4b6496]">
-			
-						<a href="http://mon.gov.ua/osvita-2/zagalna-serednya-osvita/osvitni-programi/navchalni-programi-dlya-6-9-klasiv" target="_blank" title=" (у новому вікні)" class="text-[rgb(75, 100, 150)] hover:text-[rgb(50, 75, 125)] transition duration-150">
-			
-							Навчальні програми з окремих предметіів для 9-х класів
-			
-						</a>
-			
-						<a href="http://mon.gov.ua/osvita-2/zagalna-serednya-osvita/osvitni-programi/navchalni-programi-dlya-6-9-klasiv" title=" (у новому вікні)" class="hidden"><br> <br></a>
-			
-					</h2>
-			
-					
-			
-					<h2 class="text-lg font-bold text-[#4b6496]">
-			
-						<a href="http://mon.gov.ua/osvita-2/zagalna-serednya-osvita/osvitni-programi/navchalni-programi-dlya-1-4-klasiv" target="_blank" title=" (у новому вікні)" class="text-[rgb(75, 100, 150)] hover:text-[rgb(50, 75, 125)] transition duration-150">
-			
-							Навчальні програми з окремих предметів для 1-4 класів
-			
-						</a>
-			
-						<a href="http://mon.gov.ua/osvita-2/zagalna-serednya-osvita/osvitni-programi/navchalni-programi-dlya-1-4-klasiv" title=" (у новому вікні)" class="hidden"></a>
-			
-					</h2>
-			
-				</div>
-			
-            </article>
+    <!-- MAIN ANNOUNCEMENT BANNER -->
+    <div class="bg-gradient-to-br from-indigo-50 via-slate-50 to-white border-l-4 border-brand-500 rounded-r-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 mb-10 relative overflow-hidden">
+        <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center text-xl shrink-0 mt-1">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+            <div>
+                <h2 class="font-oswald text-xl sm:text-2xl font-bold text-slate-800 mb-2">
+                    Особливості освітнього процесу
+                </h2>
+                <p class="text-slate-600 text-base sm:text-lg leading-relaxed font-medium">
+                    1-9 класи працюють за програмою Нової української школи (НУШ).
+                </p>
+            </div>
         </div>
     </div>
+
+    <!-- MAIN PROGRAM DOWNLOAD CARD -->
+    <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-100 hover:shadow-lg transition-shadow duration-300 mb-10">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="space-y-2 text-center md:text-left">
+                <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                    Основний документ
+                </span>
+                <h3 class="font-oswald text-xl sm:text-2xl font-bold text-slate-800">
+                    ОСВІТНЯ ПРОГРАМА на 2026-2027 навчальний рік
+                </h3>
+                <p class="text-slate-500 text-sm">
+                    Затверджена програма гімназії у форматі PDF
+                </p>
+            </div>
+            <a href="http://drive.google.com/file/d/1jcu6CVtb63cUDaziHDrbQ28k-bvV764e/view?usp=sharing" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               title="Завантажити у новому вікні" 
+               class="btn-gradient-shadow text-white text-sm font-semibold py-3 px-6 rounded-xl inline-flex items-center gap-2 shrink-0 transition-transform hover:-translate-y-0.5">
+                <i class="fa-solid fa-file-pdf text-base"></i>
+                <span>Завантажити програму</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-75"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- SUBJECT PROGRAM LINKS GRID -->
+    <div class="space-y-4">
+        <h3 class="font-oswald text-xl sm:text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-list-check text-brand-500"></i> Навчальні програми з окремих предметів
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Link Card 1: 5-9 класи (НУШ) -->
+            <a href="http://mon.gov.ua/osvita-2/zagalna-serednya-osvita/osvitni-programi/modelni-navchalni-programi-dlya-5-9-klasiv-novoi-ukrainskoi-shkoli-zaprovadzhuyutsya-poetapno-z-2022-roku" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="group bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:border-brand-500 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+                <div>
+                    <div class="w-10 h-10 rounded-lg bg-indigo-50 text-brand-500 flex items-center justify-center text-lg mb-4 group-hover:bg-brand-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-shapes"></i>
+                    </div>
+                    <span class="text-xs font-semibold uppercase text-brand-500 tracking-wider">НУШ • Базова школа</span>
+                    <h4 class="font-oswald text-lg font-bold text-slate-800 group-hover:text-brand-500 transition-colors mt-1 mb-2">
+                        5–9 класи
+                    </h4>
+                    <p class="text-slate-500 text-xs sm:text-sm leading-relaxed">
+                        Модельні навчальні програми з окремих предметів для 5-9 класів Нової української школи.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-brand-500 font-semibold text-xs sm:text-sm group-hover:translate-x-1 transition-transform">
+                    <span>Перейти на сайт МОН</span>
+                    <i class="fa-solid fa-chevron-right ml-1 text-xs"></i>
+                </div>
+            </a>
+
+            <!-- Link Card 2: 1-4 класи (НУШ) -->
+            <a href="http://mon.gov.ua/osvita-2/zagalna-serednya-osvita/osvitni-programi/navchalni-programi-dlya-1-4-klasiv" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="group bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:border-brand-500 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+                <div>
+                    <div class="w-10 h-10 rounded-lg bg-indigo-50 text-brand-500 flex items-center justify-center text-lg mb-4 group-hover:bg-brand-500 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-child"></i>
+                    </div>
+                    <span class="text-xs font-semibold uppercase text-brand-500 tracking-wider">НУШ • Початкова школа</span>
+                    <h4 class="font-oswald text-lg font-bold text-slate-800 group-hover:text-brand-500 transition-colors mt-1 mb-2">
+                        1–4 класи
+                    </h4>
+                    <p class="text-slate-500 text-xs sm:text-sm leading-relaxed">
+                        Навчальні програми з окремих предметів для 1-4 класів Початкової школи.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center text-brand-500 font-semibold text-xs sm:text-sm group-hover:translate-x-1 transition-transform">
+                    <span>Перейти на сайт МОН</span>
+                    <i class="fa-solid fa-chevron-right ml-1 text-xs"></i>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
 </div>
 
 <style>
-    /* Застосування шрифту Inter до всього тіла документа */
-    body {
-        font-family: "Open Sans", sans-serif;
-        background-color: #f3f4f6; /* Light gray background */
-        font-size: larger;
+    /* Стиль декоративної лінії під заголовком */
+    .page-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background-color: #4b6496;
+        border-radius: 9999px;
+    }
+
+    /* Градієнтні кнопки з тінню */
+    .btn-gradient-shadow {
+        background-image: linear-gradient(135deg, #6366f1 0%, #4b6496 100%);
+        box-shadow: 0 4px 14px rgba(75, 100, 150, 0.35);
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-gradient-shadow:hover {
+        box-shadow: 0 6px 20px rgba(75, 100, 150, 0.45);
     }
 </style>

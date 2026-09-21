@@ -2,73 +2,125 @@
 import schoollogo from "../assets/logo.jpg";
 ---
 
-<footer class="text-white pt-12 pb-8 mt-6" style="background-color: rgb(75, 100, 150); border-color: rgb(110, 135, 185);">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
-
-            <!-- Блок 1: Фундаментальні Контакти та Фізичне Розташування -->
-            <div class="md:col-span-2">
-
-                <!-- Повна Адреса -->
-                <div class="mb-3">
-                    <p class="font-semibold" style="color: rgb(220, 230, 250);">Адреса:</p>
-                    <p class="text-lg" style="color: rgb(240, 245, 255);">Дніпровський район, проспект Воскресенський, 14А, м. Київ, 02130</p>
+<footer id="contacts" class="bg-slate-900 text-slate-300 border-t border-slate-800 mt-16 font-inter">
+    <!-- Основний контент футера -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
+            
+            <!-- Блок 1: Інформація про гімназію та Контакти -->
+            <div class="lg:col-span-6 space-y-6">
+                <!-- Логотип та Назва -->
+                <div class="flex items-center gap-4">
+                    <img 
+                        src={schoollogo.src || schoollogo} 
+                        alt="Логотип Гімназії №201" 
+                        class="w-14 h-14 rounded-full object-cover border-2 border-slate-700 bg-white shadow-md flex-shrink-0"
+                        onerror="this.onerror=null; this.src='https://placehold.co/100x100/4b6496/ffffff?text=201';"
+                    />
+                    <div>
+                        <h4 class="font-oswald text-xl font-semibold text-white tracking-wide">
+                            Гімназія №201 м. Києва
+                        </h4>
+                        <p class="text-xs text-slate-400">
+                            Дніпровський район • Якісна освіта та гармонійний розвиток
+                        </p>
+                    </div>
                 </div>
 
-                <!-- Номер Телефону -->
-                <div class="mb-3">
-                    <p class="font-semibold" style="color: rgb(220, 230, 250);">Номер Телефону:</p>
-                    <!-- Посилання: інлайн-стиль для кольору тексту -->
-                    <a href="tel:+380633197982" class="text-lg transition duration-150 rounded-md hover:underline" style="color: rgb(240, 245, 255);">
-                        +38 (063) 319-79-82
-                    </a>
+                <!-- Контактна інформація -->
+                <div class="space-y-3.5 text-sm sm:text-base pt-2">
+                    <!-- Адреса -->
+                    <div class="flex items-start gap-3 text-slate-300">
+                        <i class="fa-solid fa-location-dot text-amber-400 mt-1 text-lg flex-shrink-0"></i>
+                        <div>
+                            <span class="block text-xs font-semibold uppercase tracking-wider text-slate-400">Адреса:</span>
+                            <span>Дніпровський район, проспект Воскресенський, 14А, м. Київ, 02130</span>
+                        </div>
+                    </div>
+
+                    <!-- Телефон -->
+                    <div class="flex items-center gap-3 text-slate-300">
+                        <i class="fa-solid fa-phone text-amber-400 text-lg flex-shrink-0"></i>
+                        <div>
+                            <span class="block text-xs font-semibold uppercase tracking-wider text-slate-400">Номер Телефону:</span>
+                            <a href="tel:+380633197982" class="text-slate-100 hover:text-amber-300 font-medium transition-colors">
+                                +38 (063) 319-79-82
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="flex items-center gap-3 text-slate-300">
+                        <i class="fa-solid fa-envelope text-amber-400 text-lg flex-shrink-0"></i>
+                        <div>
+                            <span class="block text-xs font-semibold uppercase tracking-wider text-slate-400">Електронна Пошта:</span>
+                            <a href="mailto:szhs201@ukr.net" class="text-slate-100 hover:text-amber-300 font-medium transition-colors">
+                                szhs201@ukr.net
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Електронна Пошта -->
-                <div class="mb-6">
-                    <p class="font-semibold" style="color: rgb(220, 230, 250);">Електронна Пошта:</p>
-                     <!-- Посилання: інлайн-стиль для кольору тексту -->
-                    <a href="mailto:szhs201@ukr.net" class="text-lg transition duration-150 rounded-md hover:underline" style="color: rgb(240, 245, 255);">
-                        szhs201@ukr.net
-                    </a>
+                <!-- Соціальні мережі -->
+                <div class="pt-2">
+                    <span class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Приєднуйтесь до нас:</span>
+                    <div class="flex items-center gap-2">
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 hover:text-white flex items-center justify-center transition-colors text-slate-300 text-sm border border-slate-700">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="https://t.me" target="_blank" rel="noopener noreferrer" aria-label="Telegram" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 hover:text-white flex items-center justify-center transition-colors text-slate-300 text-sm border border-slate-700">
+                            <i class="fa-brands fa-telegram"></i>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 hover:text-white flex items-center justify-center transition-colors text-slate-300 text-sm border border-slate-700">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 hover:text-white flex items-center justify-center transition-colors text-slate-300 text-sm border border-slate-700">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <!-- Блок 2: Коротка Карта (Міні-віджет) -->
-            <div class="md:col-span-2">
-                <!-- Заголовок: інлайн-стиль для акцентного кольору -->
-                <h3 class="text-xl font-bold mb-4" style="color: rgb(220, 230, 250);">Розташування на Карті</h3>
-                <div class="w-full rounded-xl overflow-hidden shadow-2xl h-48">
-                    <!-- Вбудований міні-віджет Google Maps (iframe-заглушка) -->
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1057.3640536201472!2d30.598887007771065!3d50.4750554315028!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4d0236c6a2b53%3A0x64aabbf572f0e542!2sSecondary%20school%20%E2%84%96%20201!5e0!3m2!1sen!2sua!4v1760954317083!5m2!1sen!2sua"
-                        width="100%"
-                        height="100%"
-                        style="border:0;"
-                        allowfullscreen="true"
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"
-                        title="Карта розташування"
-                        class="rounded-xl"
-                    ></iframe>
+            <!-- Блок 2: Карта (Google Maps) -->
+            <div class="lg:col-span-6 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-oswald text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-map-location-dot text-amber-400"></i> Розташування на Карті
+                    </h3>
+                    <div class="w-full rounded-2xl overflow-hidden shadow-lg h-56 border border-slate-800 bg-slate-800">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1057.3640536201472!2d30.598887007771065!3d50.4750554315028!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4d0236c6a2b53%3A0x64aabbf572f0e542!2sSecondary%20school%20%E2%84%96%20201!5e0!3m2!1sen!2sua!4v1760954317083!5m2!1sen!2sua"
+                            width="100%"
+                            height="100%"
+                            style="border:0;"
+                            allowfullscreen="true"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Карта розташування Гімназії №201"
+                            class="w-full h-full"
+                        ></iframe>
+                    </div>
                 </div>
             </div>
+
         </div>
 
-        <!-- Роздільник та інформація про розробників -->
-        <div class="mt-10 pt-6 border-t border-gray-700 text-center">
-            <div class="mt-1 text-sm space-x-4" style="color: rgb(200, 215, 240);">
+        <!-- Нижній роздільник, Автори та Копірайт -->
+        <div class="mt-12 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+            <!-- Інформація про розробників -->
+            <div class="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center sm:text-left">
                 <span>
-                    Адміністратор сайту: 
-                    <!-- Посилання: інлайн-стиль для кольору тексту -->
-                    <a style="color: rgb(240, 245, 255);">вчитель гімназії Чусов С.Є.</a>
+                    Адміністратор сайту: <strong class="text-slate-300 font-medium">вчитель гімназії Чусов С.Є.</strong>
                 </span>
-                <span>|</span>
+                <span class="hidden sm:inline text-slate-600">|</span>
                 <span>
-                    Творець сайту: 
-                    <!-- Посилання: інлайн-стиль для кольору тексту -->
-                    <a style="color: rgb(240, 245, 255);">вчитель гімназії Скопінцев Д.Д.</a>
+                    Творець сайту: <strong class="text-slate-300 font-medium">вчитель гімназії Скопінцев Д.Д.</strong>
                 </span>
+            </div>
+
+            <!-- Авторські права -->
+            <div class="text-center sm:text-right text-slate-500">
+                <p>© 2026 Гімназія №201. Всі права захищені.</p>
             </div>
         </div>
 
