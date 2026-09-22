@@ -1,157 +1,277 @@
 ---
 import schoollogo from "../assets/logo.jpg";
+
+// Вхідний масив звітів для зручного керування та чистоти шаблону
+const reports = [
+  {
+    type: "governance",
+    title: "Звіт керівника закладу Гмирі Ганни Володимирівни про підсумки діяльності гімназії № 201 Дніпровського району м. Києва у 2025-2026 навчальному році",
+    url: "https://drive.google.com/file/d/1mlK6Yk9R-Vj_3clqC6_Rwdy4I8X4z_jt/view?usp=sharing",
+    tag: "2025-2026 н.р.",
+    icon: "fa-solid fa-graduation-cap"
+  },
+  {
+    type: "finance",
+    title: "Звіт про використання бюджетних коштів у 2025 році",
+    url: "http://drive.google.com/file/d/1o-3q3bZBT1ulZHzzmgJP9wS3h5-FR0k3/view?usp=sharing",
+    tag: "2025 рік",
+    icon: "fa-solid fa-coins"
+  },
+  {
+    type: "governance",
+    title: "Звіт керівника закладу Гмирі Ганни Володимирівни про підсумки діяльності гімназії № 201 Дніпровського району м. Києва у 2024-2025 навчальному році",
+    url: "http://docs.google.com/presentation/d/1ILtO6Kz-uJObGB4kcERAHPIST_5Gw7Bg/edit?usp=sharing&ouid=104578019701764355146&rtpof=true&sd=true",
+    tag: "2024-2025 н.р.",
+    icon: "fa-solid fa-graduation-cap"
+  },
+  {
+    type: "finance",
+    title: "Звіт про використання бюджетних коштів у 2024 році",
+    url: "http://drive.google.com/file/d/1Lb364_MXse8SjWPuuot-EDqhcDpzvQ1u/view?usp=sharing",
+    tag: "2024 рік",
+    icon: "fa-solid fa-coins"
+  },
+  {
+    type: "governance",
+    title: "Звіт керівника закладу Гмирі Ганни Володимирівни про підсумки діяльності середньої загальноосвітньої школи І-ІІІ ступенів № 201 м. Києва у 2023-2024 навчальному році",
+    url: "http://docs.google.com/presentation/d/1MUS7lNp1U3-KEtD0NF4KQHmijjjdcnVx/edit?usp=sharing&ouid=104578019701764355146&rtpof=true&sd=true",
+    tag: "2023-2024 н.р.",
+    icon: "fa-solid fa-graduation-cap"
+  },
+  {
+    type: "finance",
+    title: "Звіт про використання бюджетних коштів у 2023 році",
+    url: "http://drive.google.com/file/d/1Y4xqpa-KZtqvqPx3DqiKgraMmSGrO1Ng/view?usp=sharing",
+    tag: "2023 рік",
+    icon: "fa-solid fa-coins"
+  },
+  {
+    type: "governance",
+    title: "Звіт керівника закладу Гмирі Ганни Володимирівни про підсумки діяльності середньої загальноосвітньої школи І-ІІІ ступенів № 201 м. Києва у 2022-2023 навчальному році",
+    url: "http://docs.google.com/presentation/d/1KfIBEPynQvpIMreZnPcrJWBgNrWIFrv3/edit?usp=sharing&ouid=104578019701764355146&rtpof=true&sd=true",
+    tag: "2022-2023 н.р.",
+    icon: "fa-solid fa-graduation-cap"
+  },
+  {
+    type: "finance",
+    title: "Звіт про використання бюджетних коштів у 2022 році",
+    url: "http://drive.google.com/file/d/1cUskUIcemmm95AvdVGqWwx6XW7-aVDKN/view?usp=share_link",
+    tag: "2022 рік",
+    icon: "fa-solid fa-coins"
+  },
+  {
+    type: "governance",
+    title: "Звіт керівника закладу Гмирі Ганни Володимирівни про підсумки діяльності середньої загальноосвітньої школи І-ІІІ ступенів № 201 м. Києва у 2021-2022 навчальному році",
+    url: "http://docs.google.com/presentation/d/1XCY9oKwpSRIIhdwtvtQHAP8EnnJLkw59/edit?usp=sharing&ouid=104578019701764355146&rtpof=true&sd=true",
+    tag: "2021-2022 н.р.",
+    icon: "fa-solid fa-graduation-cap"
+  },
+  {
+    type: "finance",
+    title: "Звіт про використання бюджетних коштів та отримання благодійної допомоги у 2021 році",
+    url: "http://drive.google.com/file/d/1IRG4HkJJg5cijU340fzMX5iZybQ5-cnj/view?usp=sharing",
+    tag: "2021 рік",
+    icon: "fa-solid fa-coins"
+  },
+  {
+    type: "governance",
+    title: "Звіт керівника закладу Гмирі Ганни Володимирівни про підсумки діяльності середньої загальноосвітньої школи І-ІІІ ступенів № 201 м. Києва у 2020-2021 навчальному році",
+    url: "https://docs.google.com/presentation/d/19a1jA7YKh7zn2zSuf5cVGuJS8wbLOP4c/edit?usp=sharing&ouid=106072773074655584963&rtpof=true&sd=true",
+    tag: "2020-2021 н.р.",
+    icon: "fa-solid fa-graduation-cap"
+  },
+  {
+    type: "finance",
+    title: "Звіт про використання бюджетних коштів та отримання благодійної допомоги у 2020 році",
+    url: "http://school201.edukit.kiev.ua/Files/downloads/%D0%97%D0%B2%D1%96%D1%82%202020%20%D1%80%D1%96%D0%BA_2021_02_26.pdf",
+    tag: "2020 рік",
+    icon: "fa-solid fa-coins"
+  },
+  {
+    type: "governance",
+    title: "Звіт керівника закладу Гмирі Ганни Володимирівни батьківській громаді (23.09.2020 р.)",
+    url: "http://school201.edukit.kiev.ua/Files/downloads/%D0%97%D0%B2%D1%96%D1%82%20%D0%BA%D0%B5%D1%80%D1%96%D0%B2%D0%BD%D0%B8%D0%BA%D0%B0_2020.pdf",
+    tag: "2020 рік",
+    icon: "fa-solid fa-users"
+  },
+  {
+    type: "finance",
+    title: "Звіт про використання коштів та отримання допомоги в 2019 році",
+    url: "http://school201.edukit.kiev.ua/Files/downloads/%D0%97%D0%92%D1%96%D0%A2%20%D0%B2%D0%B8%D0%BA%D0%BE%D1%80%D0%B8%D1%81%D1%82%D0%B0%D0%BD%D0%BD%D1%8F%20%D0%B1%D1%8E%D0%B4%D0%B6%D0%B5%D1%82%D0%BD%D0%B8%D1%85%20%20%D0%BA%D0%BE%D1%88%D1%82%D1%96%D0%B2%202019.pdf",
+    tag: "2019 рік",
+    icon: "fa-solid fa-coins"
+  },
+  {
+    type: "governance",
+    title: "Аналіз діяльності середньої загальноосвітньої школи І-ІІІ ступенів №201 м.Києва в 2018-2019 навчальному році та завдання на 2019-2020 навчальний рік",
+    url: "http://school201.edukit.kiev.ua/Files/downloads/%D0%90%D0%BD%D0%B0%D0%BB%D1%96%D0%B7%20%D0%B4%D1%96%D1%8F%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%96%20%20%D1%81%D0%B5%D1%80%D0%B5%D0%B4%D0%BD%D1%8C%D0%BE%D1%97%20%D0%B7%D0%B0%D0%B3%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BE%D1%81%D0%B2%D1%96%D1%82%D0%BD%D1%8C%D0%BE%D1%97%20%D1%88%D0%BA%D0%BE%D0%BB%D0%B8%20%D0%86-%D0%86%D0%86%D0%86.pptx",
+    tag: "2018-2019 н.р.",
+    icon: "fa-solid fa-chart-line"
+  },
+  {
+    type: "finance",
+    title: "Звіт про використання бюджетних коштів та отримання благодійної допомоги у 2018 році",
+    url: "http://school201.edukit.kiev.ua/Files/downloadcenter/%D0%97%D0%B2%D1%96%D1%82%20%D0%BF%D1%80%D0%BE%20%D0%B2%D0%B8%D0%BA%D0%BE%D1%80%D0%B8%D1%81%D1%82%D0%B0%D0%BD%D0%BD%D1%8F%20%D0%B1%D1%8E%D0%B4%D0%B6%D0%B5%D1%82%D0%BD%D0%B8%D1%85%20%D0%BA%D0%BE%D1%88%D1%82%D1%96%D0%B2%20%D0%B7%D0%B0%202018%20%D1%80%D1%96%D0%BA.pdf",
+    tag: "2018 рік",
+    icon: "fa-solid fa-coins"
+  },
+  {
+    type: "governance",
+    title: "Звіт керівника батьківській громаді (зустріч 26 вересня 2018 року)",
+    url: "http://school201.edukit.kiev.ua/Files/downloads/%D0%97%D0%B2%D1%96%D1%82%20%D0%BA%D0%B5%D1%80%D1%96%D0%B2%D0%BD%D0%B8%D0%BA%D0%B0%20%D0%B1%D0%B0%D1%82%D1%8C%D0%BA%D1%96%D0%B2%D1%81%D1%8C%D0%BA%D1%96%D0%B9%20%D0%B3%D1%80%D0%BE%D0%BC%D0%B0%D0%B4%D1%96%2026%20%D0%B2%D0%B5%D1%80%D0%B5%D1%81%D0%BD%D1%8F%202018%20%D1%80%D0%BE%D0%BA%D1%83.docx",
+    tag: "2018 рік",
+    icon: "fa-solid fa-users"
+  },
+  {
+    type: "governance",
+    title: "Аналіз діяльності закладу в 2017-2018 н.р.",
+    url: "http://school201.edukit.kiev.ua/Files/downloads/%D0%90%D0%BD%D0%B0%D0%BB%D1%96%D0%B7%20%D0%B4%D1%96%D1%8F%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%96%20%D0%B7%D0%B0%D0%BA%D0%BB%D0%B0%D0%B4%D1%83%20%D0%B2%202017-2018%20%D0%BD.%D1%80..pptx",
+    tag: "2017-2018 н.р.",
+    icon: "fa-solid fa-chart-line"
+  },
+  {
+    type: "finance",
+    title: "Звіт про використання бюджетних коштів та отримання благодійної допомоги у 2017 році",
+    url: "http://school201.edukit.kiev.ua/Files/downloads/%D0%97%D0%B2%D1%96%D1%82%20%D0%BF%D1%80%D0%BE%20%D0%B2%D0%B8%D0%BA%D0%BE%D1%80%D0%B8%D1%81%D1%82%D0%B0%D0%BD%D0%BD%D1%8F%20%D0%B1%D1%8E%D0%B4%D0%B6%D0%B5%D1%82%D0%BD%D0%B8%D1%85%20%D0%BA%D0%BE%D1%88%D1%82%D1%96%D0%B2%20%D1%82%D0%B0%20%D0%BE%D1%82%D1%80%D0%B8%D0%BC%D0%B0%D0%BD%D0%BD%D1%8F%20%D0%B1%D0%BB%D0%B0%D0%B3%D0%BE%D0%B4%D1%96%D0%B9%D0%BD%D0%BE%D1%97%20%D0%B4%D0%BE%D0%BF%D0%BE%D0%BC%D0%BE%D0%B3%D0%B8%20%D1%83%202017%20%D1%80%D0%BE%D1%86%D1%96.pdf",
+    tag: "2017 рік",
+    icon: "fa-solid fa-coins"
+  },
+  {
+    type: "governance",
+    title: "Звіт керівника батьківській громаді (2017)",
+    url: "http://school201.edukit.kiev.ua/Files/downloads/%D0%B7%D0%B2%D1%96%D1%82%20%D0%BA%D0%B5%D1%80%D1%96%D0%B2%D0%BD%D0%B8%D0%BA%D0%B0%20%D0%B1%D0%B0%D1%82%D1%8C%D0%BA%D1%96%D0%B2%D1%81%D1%8C%D0%BA%D1%96%D0%B9%20%D0%B3%D1%80%D0%BE%D0%BC%D0%B0%D0%B4%D1%96%202017.docx",
+    tag: "2017 рік",
+    icon: "fa-solid fa-users"
+  },
+  {
+    type: "governance",
+    title: "Звіт керівника закладу (2017)",
+    url: "http://school201.edukit.kiev.ua/Files/downloads/%D0%B7%D0%B2%D1%96%D1%82%20%D0%BA%D0%B5%D1%80%D1%96%D0%B2%D0%BD%D0%B8%D0%BA%D0%B0%20%D0%B7%D0%B0%D0%BA%D0%BB%D0%B0%D0%B4%D1%83.pptx",
+    tag: "2017 рік",
+    icon: "fa-solid fa-file-powerpoint"
+  },
+  {
+    type: "property",
+    title: "Інформація про зміцнення МТБ закладу",
+    url: "http://school201.edukit.kiev.ua/Files/downloads/%D0%86%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D1%96%D1%8F%20%D0%BF%D1%80%D0%BE%20%D0%B7%D0%BC%D1%96%D1%86%D0%BD%D0%B5%D0%BD%D0%BD%D1%8F%20%D0%9C%D0%A2%D0%91%20%D0%B7%D0%B0%D0%BA%D0%BB%D0%B0%D0%B4%D1%83.pdf",
+    tag: "МТБ",
+    icon: "fa-solid fa-building-circle-check"
+  },
+  {
+    type: "governance",
+    title: "Про підсумки роботи закладу в 2015-2016 н.р. та завдання на новий, 2016-2017 н.р.",
+    url: "http://school201.edukit.kiev.ua/Files/downloads/%D0%B7%D0%B2%D1%96%D1%82%20%D0%BA%D0%B5%D1%80%D1%96%D0%B2%D0%BD%D0%B8%D0%BA%D0%B0.pdf",
+    tag: "2015-2016 н.р.",
+    icon: "fa-solid fa-graduation-cap"
+  },
+  {
+    type: "governance",
+    title: "Звіт керівника закладу про роботу в 2015-2016 н.р.",
+    url: "http://school201.edukit.kiev.ua/Files/downloads/%D0%B7%D0%B2%D1%96%D1%82%20%D0%BA%D0%B5%D1%80%D1%96%D0%B2%D0%BD%D0%B8%D0%BA%D0%B0%20%D0%B1%D0%B0%D1%82%D1%8C%D0%BA%D1%96%D0%B2%D1%81%D1%8C%D0%BA%D1%96%D0%B9%20%D0%B3%D1%80%D0%BE%D0%BC%D0%B0%D0%B4%D1%96%202016.pdf",
+    tag: "2015-2016 н.р.",
+    icon: "fa-solid fa-users"
+  },
+  {
+    type: "property",
+    title: "Інформація про виконані роботи та витрачені кошти влітку 2015 року",
+    url: "http://school201.edukit.kiev.ua/Files/downloads/%D0%86%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D1%96%D1%8F.pdf",
+    tag: "2015 рік",
+    icon: "fa-solid fa-screwdriver-wrench"
+  }
+];
 ---
 
-<div class="flex-grow container mx-auto p-4">
-    <div class="w-full bg-white p-6 rounded-lg shadow-md">
-        <article>
+<div class="flex-grow container mx-auto px-4 py-8 sm:px-6 lg:px-8 font-inter">
+  <!-- TITLE CONTAINER WITH DECORATIVE UNDERLINE -->
+  <div class="text-center mb-10">
+    <h1 class="page-title font-oswald text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-800 relative pb-4 inline-block tracking-wide">
+      <i class="fa-solid fa-file-lines text-[#4b6496] mr-3"></i>Звіти закладу освіти
+    </h1>
+    <p class="text-slate-500 text-sm sm:text-base mt-3 max-w-2xl mx-auto">
+      Офіційні підсумки діяльності, фінансові звіти використання бюджетних коштів та матеріально-технічний стан Гімназії №201
+    </p>
+  </div>
 
-            <h1 class="text-3xl font-bold text-gray-900 mb-6 border-b pb-2">Звіти закладу освіти</h1>
-            
-            <div class="space-y-4">
-                
-                <div class="border-l-4 border-indigo-600 pl-4 py-2 bg-indigo-50 rounded-lg" style="border-left-color: rgb(75, 100, 150); background-color: rgb(240, 243, 248);">
-                    <a href="https://drive.google.com/file/d/1mlK6Yk9R-Vj_3clqC6_Rwdy4I8X4z_jt/view?usp=sharing" target="_blank" title="Звіт керівника 2025-2026" class="block text-lg font-semibold text-indigo-800 hover:text-indigo-600 transition duration-150" style="color: rgb(75, 100, 150);">
-                        Звіт керівника закладу <strong>Гмирі Ганни Володимирівни</strong> про підсумки діяльності гімназії № 201 Дніпровського району м. Києва <strong>у 2025-2026 навчальному році</strong>
-                    </a>
-                </div>
-
-                <div class="border-l-4 border-gray-400 pl-4 py-2">
-                    <a href="http://drive.google.com/file/d/1o-3q3bZBT1ulZHzzmgJP9wS3h5-FR0k3/view?usp=sharing" target="_blank" title="Звіт про використання бюджетних коштів 2024" class="block text-lg font-medium text-gray-700 hover:text-gray-900 transition duration-150">
-                        Звіт про використання бюджетних коштів у <strong>у 2025 році</strong>
-                    </a>
-                </div>
-            
-                <div class="border-l-4 border-indigo-600 pl-4 py-2 bg-indigo-50 rounded-lg" style="border-left-color: rgb(75, 100, 150); background-color: rgb(240, 243, 248);">
-                    <a href="http://docs.google.com/presentation/d/1ILtO6Kz-uJObGB4kcERAHPIST_5Gw7Bg/edit?usp=sharing&amp;ouid=104578019701764355146&amp;rtpof=true&amp;sd=true" target="_blank" title="Звіт керівника 2024-2025" class="block text-lg font-semibold text-indigo-800 hover:text-indigo-600 transition duration-150" style="color: rgb(75, 100, 150);">
-                        Звіт керівника закладу <strong>Гмирі Ганни Володимирівни</strong> про підсумки діяльності гімназії № 201 Дніпровського району м. Києва <strong>у 2024-2025 навчальному році</strong>
-                    </a>
-                </div>
-            
-                <div class="border-l-4 border-gray-400 pl-4 py-2">
-                    <a href="http://drive.google.com/file/d/1Lb364_MXse8SjWPuuot-EDqhcDpzvQ1u/view?usp=sharing" target="_blank" title="Звіт про використання бюджетних коштів 2024" class="block text-lg font-medium text-gray-700 hover:text-gray-900 transition duration-150">
-                        Звіт про використання бюджетних коштів <strong>у 2024 році</strong>
-                    </a>
-                </div>
-            
-                <div class="border-l-4 border-blue-600 pl-4 py-2 bg-blue-50 rounded-lg" style="border-left-color: rgb(75, 100, 150); background-color: rgb(240, 243, 248);">
-                    <a href="http://docs.google.com/presentation/d/1MUS7lNp1U3-KEtD0NF4KQHmijjjdcnVx/edit?usp=sharing&amp;ouid=104578019701764355146&amp;rtpof=true&amp;sd=true" target="_blank" title="Звіт керівника 2023-2024" class="block text-lg font-semibold text-blue-800 hover:text-blue-600 transition duration-150" style="color: rgb(75, 100, 150);">
-                        Звіт керівника закладу <strong>Гмирі Ганни Володимирівни</strong> про підсумки діяльності середньої загальноосвітньої школи І-ІІІ ступенів № 201 м. Києва у <strong>2023-2024 навчальному році</strong>
-                    </a>
-                </div>
-            
-                <div class="border-l-4 border-gray-400 pl-4 py-2">
-                    <a href="http://drive.google.com/file/d/1Y4xqpa-KZtqvqPx3DqiKgraMmSGrO1Ng/view?usp=sharing" target="_blank" title="Звіт про використання бюджетних коштів 2023" class="block text-lg font-medium text-gray-700 hover:text-gray-900 transition duration-150">
-                        Звіт про використання бюджетних коштів <strong>у 2023 році</strong>
-                    </a>
-                </div>
-            
-                <div class="border-l-4 border-blue-600 pl-4 py-2 bg-blue-50 rounded-lg" style="border-left-color: rgb(75, 100, 150); background-color: rgb(240, 243, 248);">
-                    <a href="http://docs.google.com/presentation/d/1KfIBEPynQvpIMreZnPcrJWBgNrWIFrv3/edit?usp=sharing&amp;ouid=104578019701764355146&amp;rtpof=true&amp;sd=true" target="_blank" title="Звіт керівника 2022-2023" class="block text-lg font-semibold text-blue-800 hover:text-blue-600 transition duration-150" style="color: rgb(75, 100, 150);">
-                        Звіт керівника закладу <strong>Гмирі Ганни Володимирівни</strong> про підсумки діяльності середньої загальноосвітньої школи І-ІІІ ступенів № 201 м. Києва <strong>у 2022-2023 навчальному році</strong>
-                    </a>
-                </div>
-            
-                <div class="border-l-4 border-gray-400 pl-4 py-2">
-                    <a href="http://drive.google.com/file/d/1cUskUIcemmm95AvdVGqWwx6XW7-aVDKN/view?usp=share_link" title="Звіт про використання бюджетних коштів 2022" class="block text-lg font-medium text-gray-700 hover:text-gray-900 transition duration-150">
-                        Звіт про використання бюджетних коштів <strong>у 2022 році</strong>
-                    </a>
-                </div>
-            
-                <div class="border-l-4 border-blue-600 pl-4 py-2 bg-blue-50 rounded-lg" style="border-left-color: rgb(75, 100, 150); background-color: rgb(240, 243, 248);">
-                    <a href="http://docs.google.com/presentation/d/1XCY9oKwpSRIIhdwtvtQHAP8EnnJLkw59/edit?usp=sharing&amp;ouid=104578019701764355146&amp;rtpof=true&amp;sd=true" target="_blank" title="Звіт керівника 2021-2022" class="block text-lg font-semibold text-blue-800 hover:text-blue-600 transition duration-150" style="color: rgb(75, 100, 150);">
-                        Звіт керівника закладу <strong>Гмирі Ганни Володимирівни </strong>про підсумки діяльності середньої загальноосвітньої школи І-ІІІ ступенів № 201 м. Києва <strong>у 2021-2022 навчальному році</strong>
-                    </a>
-                </div>
-            
-                <div class="border-l-4 border-gray-400 pl-4 py-2">
-                    <a href="http://drive.google.com/file/d/1IRG4HkJJg5cijU340fzMX5iZybQ5-cnj/view?usp=sharing" target="_blank" title="Звіт про використання бюджетних коштів 2021" class="block text-lg font-medium text-gray-700 hover:text-gray-900 transition duration-150">
-                        Звіт про використання бюджетних коштів та отримання благодійної допомоги у <strong>2021 році</strong>
-                    </a>
-                </div>
-            
-                <div class="border-l-4 border-blue-600 pl-4 py-2 bg-blue-50 rounded-lg" style="border-left-color: rgb(75, 100, 150); background-color: rgb(240, 243, 248);">
-                    <a href="https://docs.google.com/presentation/d/19a1jA7YKh7zn2zSuf5cVGuJS8wbLOP4c/edit?usp=sharing&amp;ouid=106072773074655584963&amp;rtpof=true&amp;sd=true" target="_blank" title="Звіт керівника 2020-2021" class="block text-lg font-semibold text-blue-800 hover:text-blue-600 transition duration-150" style="color: rgb(75, 100, 150);">
-                        Звіт керівника закладу <strong>Гмирі Ганни Володимирівни</strong> про підсумки діяльності середньої загальноосвітньої школи І-ІІІ ступенів № 201 м. Києва <strong>у 2020-2021 навчальному році</strong>
-                    </a>
-                </div>
-            
-                <div class="border-l-4 border-gray-400 pl-4 py-2">
-                    <a href="http://school201.edukit.kiev.ua/Files/downloads/%D0%97%D0%B2%D1%96%D1%82%202020%20%D1%80%D1%96%D0%BA_2021_02_26.pdf" class="block text-lg font-medium text-gray-700 hover:text-gray-900 transition duration-150">
-                        Звіт про використання бюджетних коштів та отримання благодійної допомоги у <strong>2020 році</strong>
-                    </a>
-                    <a href="http://school201.edukit.kiev.ua/Files/downloads/%D0%97%D0%B2%D1%96%D1%82%20%D0%BA%D0%B5%D1%80%D1%96%D0%B2%D0%BD%D0%B8%D0%BA%D0%B0_2020.pdf" class="block text-lg font-medium text-gray-700 hover:text-gray-900 transition duration-150 mt-2">
-                        Звіт керівника закладу <strong>Гмирі Ганни Володимирівни</strong> батьківській громаді <strong>23.09.2020 р</strong>
-                    </a>
-                </div>
-            
-                <div class="border-l-4 border-gray-400 pl-4 py-2">
-                    <a href="http://school201.edukit.kiev.ua/Files/downloads/%D0%97%D0%92%D0%86%D0%A2%20%D0%B2%D0%B8%D0%BA%D0%BE%D1%80%D0%B8%D1%81%D1%82%D0%B0%D0%BD%D0%BD%D1%8F%20%D0%B1%D1%8E%D0%B4%D0%B6%D0%B5%D1%82%D0%BD%D0%B8%D1%85%20%20%D0%BA%D0%BE%D1%88%D1%82%D1%96%D0%B2%202019.pdf" class="block text-lg font-medium text-gray-700 hover:text-gray-900 transition duration-150">
-                        Звіт про використання коштів та отримання допомоги в <strong>2019 році</strong>
-                    </a>
-                </div>
-            
-                <div class="border-l-4 border-teal-600 pl-4 py-2 bg-teal-50 rounded-lg" style="border-left-color: rgb(75, 100, 150); background-color: rgb(240, 243, 248);">
-                    <a href="http://school201.edukit.kiev.ua/Files/downloads/%D0%90%D0%BD%D0%B0%D0%BB%D1%96%D0%B7%20%D0%B4%D1%96%D1%8F%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%96%20%20%D1%81%D0%B5%D1%80%D0%B5%D0%B4%D0%BD%D1%8C%D0%BE%D1%97%20%D0%B7%D0%B0%D0%B3%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%BE%D1%81%D0%B2%D1%96%D1%82%D0%BD%D1%8C%D0%BE%D1%97%20%D1%88%D0%BA%D0%BE%D0%BB%D0%B8%20%D0%86-%D0%86%D0%86%D0%86.pptx" class="block text-lg font-semibold text-teal-800 hover:text-teal-600 transition duration-150" style="color: rgb(75, 100, 150);">
-                        Аналіз діяльності середньої загальноосвітньої школи І-ІІІ ступенів №201 м.Києва <strong>в 2018-2019 навчальному році</strong> та завдання на 2019-2020 навчальний рік
-                    </a>
-                </div>
-            
-                <div class="border-l-4 border-gray-400 pl-4 py-2">
-                    <a href="http://school201.edukit.kiev.ua/Files/downloadcenter/%D0%97%D0%B2%D1%96%D1%82%20%D0%BF%D1%80%D0%BE%20%D0%B2%D0%B8%D0%BA%D0%BE%D1%80%D0%B8%D1%81%D1%82%D0%B0%D0%BD%D0%BD%D1%8F%20%D0%B1%D1%8E%D0%B4%D0%B6%D0%B5%D1%82%D0%BD%D0%B8%D1%85%20%D0%BA%D0%BE%D1%88%D1%82%D1%96%D0%B2%20%D0%B7%D0%B0%202018%20%D1%80%D1%96%D0%BA.pdf" class="block text-lg font-medium text-gray-700 hover:text-gray-900 transition duration-150">
-                        Звіт про використання бюджетних коштів та отримання благодійної допомоги у <strong>2018 році</strong>
-                    </a>
-                    <a href="http://school201.edukit.kiev.ua/Files/downloads/%D0%97%D0%B2%D1%96%D1%82%20%D0%BA%D0%B5%D1%80%D1%96%D0%B2%D0%BD%D0%B8%D0%BA%D0%B0%20%D0%B1%D0%B0%D1%82%D1%8C%D0%BA%D1%96%D0%B2%D1%81%D1%8C%D0%BA%D1%96%D0%B9%20%D0%B3%D1%80%D0%BE%D0%BC%D0%B0%D0%B4%D1%96%2026%20%D0%B2%D0%B5%D1%80%D0%B5%D1%81%D0%BD%D1%8F%202018%20%D1%80%D0%BE%D0%BA%D1%83.docx" class="block text-lg font-medium text-gray-700 hover:text-gray-900 transition duration-150 mt-2">
-                        Звіт керівника батьківській громаді (зустріч <strong>26 вересня 2018 року)</strong>
-                    </a>
-                </div>
-            
-                <div class="border-l-4 border-teal-600 pl-4 py-2 bg-teal-50 rounded-lg" style="border-left-color: rgb(75, 100, 150); background-color: rgb(240, 243, 248);">
-                    <a href="http://school201.edukit.kiev.ua/Files/downloads/%D0%90%D0%BD%D0%B0%D0%BB%D1%96%D0%B7%20%D0%B4%D1%96%D1%8F%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D1%96%20%D0%B7%D0%B0%D0%BA%D0%BB%D0%B0%D0%B4%D1%83%20%D0%B2%202017-2018%20%D0%BD.%D1%80..pptx" class="block text-lg font-semibold text-teal-800 hover:text-teal-600 transition duration-150" style="color: rgb(75, 100, 150);">
-                        Аналіз діяльності закладу в <strong>2017-2018 н.р.</strong>
-                    </a>
-                </div>
-            
-                <div class="border-l-4 border-gray-400 pl-4 py-2">
-                    <a href="http://school201.edukit.kiev.ua/Files/downloads/%D0%97%D0%B2%D1%96%D1%82%20%D0%BF%D1%80%D0%BE%20%D0%B2%D0%B8%D0%BA%D0%BE%D1%80%D0%B8%D1%81%D1%82%D0%B0%D0%BD%D0%BD%D1%8F%20%D0%B1%D1%8E%D0%B4%D0%B6%D0%B5%D1%82%D0%BD%D0%B8%D1%85%20%D0%BA%D0%BE%D1%88%D1%82%D1%96%D0%B2%20%D1%82%D0%B0%20%D0%BE%D1%82%D1%80%D0%B8%D0%BC%D0%B0%D0%BD%D0%BD%D1%8F%20%D0%B1%D0%BB%D0%B0%D0%B3%D0%BE%D0%B4%D1%96%D0%B9%D0%BD%D0%BE%D1%97%20%D0%B4%D0%BE%D0%BF%D0%BE%D0%BC%D0%BE%D0%B3%D0%B8%20%D1%83%202017%20%D1%80%D0%BE%D1%86%D1%96.pdf" class="block text-lg font-medium text-gray-700 hover:text-gray-900 transition duration-150">
-                        Звіт про використання бюджетних коштів та отримання благодійної допомоги у <strong>2017 році</strong>
-                    </a>
-                    <a href="http://school201.edukit.kiev.ua/Files/downloads/%D0%B7%D0%B2%D1%96%D1%82%20%D0%BA%D0%B5%D1%80%D1%96%D0%B2%D0%BD%D0%B8%D0%BA%D0%B0%20%D0%B1%D0%B0%D1%82%D1%8C%D0%BA%D1%96%D0%B2%D1%81%D1%8C%D0%BA%D1%96%D0%B9%20%D0%B3%D1%80%D0%BE%D0%BC%D0%B0%D0%B4%D1%96%202017.docx" class="block text-lg font-medium text-gray-700 hover:text-gray-900 transition duration-150 mt-2">
-                        Звіт керівника батьківській громаді <strong>2017</strong>
-                    </a>
-                    <a href="http://school201.edukit.kiev.ua/Files/downloads/%D0%B7%D0%B2%D1%96%D1%82%20%D0%BA%D0%B5%D1%80%D1%96%D0%B2%D0%BD%D0%B8%D0%BA%D0%B0%20%D0%B7%D0%B0%D0%BA%D0%BB%D0%B0%D0%B4%D1%83.pptx" class="block text-lg font-medium text-gray-700 hover:text-gray-900 transition duration-150 mt-2">
-                        Звіт керівника закладу <strong>2017</strong>
-                    </a>
-                </div>
-            
-                <div class="border-l-4 border-yellow-600 pl-4 py-2 bg-yellow-50 rounded-lg" style="border-left-color: rgb(75, 100, 150); background-color: rgb(240, 243, 248);">
-                    <a href="http://school201.edukit.kiev.ua/Files/downloads/%D0%86%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D1%96%D1%8F%20%D0%BF%D1%80%D0%BE%20%D0%B7%D0%BC%D1%96%D1%86%D0%BD%D0%B5%D0%BD%D0%BD%D1%8F%20%D0%9C%D0%A2%D0%91%20%D0%B7%D0%B0%D0%BA%D0%BB%D0%B0%D0%B4%D1%83.pdf" class="block text-lg font-semibold text-yellow-800 hover:text-yellow-600 transition duration-150" style="color: rgb(75, 100, 150);">
-                        Інформація про зміцнення МТБ закладу
-                    </a>
-                </div>
-            
-                <div class="border-l-4 border-gray-400 pl-4 py-2">
-                    <a href="http://school201.edukit.kiev.ua/Files/downloads/%D0%B7%D0%B2%D1%96%D1%82%20%D0%BA%D0%B5%D1%80%D1%96%D0%B2%D0%BD%D0%B8%D0%BA%D0%B0.pdf" class="block text-lg font-medium text-gray-700 hover:text-gray-900 transition duration-150">
-                        Про підсумки роботи закладу в <strong>2015-2016 н.р.</strong> та завдання на новий, 2016-2017 н.р.
-                    </a>
-                    <a href="http://school201.edukit.kiev.ua/Files/downloads/%D0%B7%D0%B2%D1%96%D1%82%20%D0%BA%D0%B5%D1%80%D1%96%D0%B2%D0%BD%D0%B8%D0%BA%D0%B0%20%D0%B1%D0%B0%D1%82%D1%8C%D0%BA%D1%96%D0%B2%D1%81%D1%8C%D0%BA%D1%96%D0%B9%20%D0%B3%D1%80%D0%BE%D0%BC%D0%B0%D0%B4%D1%96%202016.pdf" class="block text-lg font-medium text-gray-700 hover:text-gray-900 transition duration-150 mt-2">
-                        Звіт керівника закладу про роботу в <strong>2015-16 н. р.</strong>
-                    </a>
-                    <a href="http://school201.edukit.kiev.ua/Files/downloads/%D0%86%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D1%96%D1%8F.pdf" class="block text-lg font-medium text-gray-700 hover:text-gray-900 transition duration-150 mt-2">
-                        Інформація про виконані роботи та витрачені кошти влітку 2015 року
-                    </a>
-                </div>
-            
+  <!-- REPORTS LIST -->
+  <div class="max-w-5xl mx-auto space-y-4">
+    {reports.map((item) => (
+      <div 
+        class={`group relative rounded-2xl p-5 border transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 bg-white ${
+          item.type === 'governance' 
+            ? 'border-l-4 border-l-[#4b6496] border-slate-200/80 bg-gradient-to-r from-[#f0f4f8]/60 to-white' 
+            : item.type === 'property'
+            ? 'border-l-4 border-l-amber-500 border-slate-200/80 bg-gradient-to-r from-amber-50/50 to-white'
+            : 'border-l-4 border-l-slate-400 border-slate-200/80 hover:border-l-[#394e77]'
+        }`}
+      >
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          
+          <!-- Left side: Icon & Title -->
+          <div class="flex items-start gap-4 flex-grow">
+            <div class={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
+              item.type === 'governance'
+                ? 'bg-[#4b6496]/10 text-[#4b6496] group-hover:bg-[#4b6496] group-hover:text-white'
+                : item.type === 'property'
+                ? 'bg-amber-100 text-amber-700 group-hover:bg-amber-500 group-hover:text-white'
+                : 'bg-slate-100 text-slate-600 group-hover:bg-slate-700 group-hover:text-white'
+            }`}>
+              <i class={`${item.icon} text-lg`}></i>
             </div>
-        </article>
-    </div>
+
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class={`text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
+                  item.type === 'governance'
+                    ? 'bg-[#4b6496]/15 text-[#394e77]'
+                    : item.type === 'property'
+                    ? 'bg-amber-100 text-amber-800'
+                    : 'bg-slate-100 text-slate-700'
+                }`}>
+                  {item.tag}
+                </span>
+              </div>
+
+              <a 
+                href={item.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="block text-base sm:text-lg font-semibold text-slate-800 hover:text-[#4b6496] transition-colors leading-snug group-hover:text-[#394e77]"
+              >
+                {item.title}
+              </a>
+            </div>
+          </div>
+
+          <!-- Right side: Action Button -->
+          <div class="sm:self-center shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 flex items-center justify-end">
+            <a 
+              href={item.url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-xl border border-slate-200 text-slate-700 hover:text-white hover:bg-[#4b6496] hover:border-[#4b6496] transition-all shadow-sm group-hover:shadow"
+            >
+              <span>Переглянути</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    ))}
+  </div>
 </div>
 
 <style>
-    /* Застосування шрифту Inter до всього тіла документа */
-    body {
-        font-family: "Open Sans", sans-serif;
-        background-color: #f3f4f6; /* Light gray background */
-        font-size: larger;
-    }
+  /* Всі шрифти та кольори успадковуються від головного лейауту сайту */
+  .page-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #4b6496;
+    border-radius: 9999px;
+  }
 </style>
