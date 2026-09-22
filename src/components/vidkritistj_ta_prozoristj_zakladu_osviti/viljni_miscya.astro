@@ -1,36 +1,123 @@
 ---
 import schoollogo from "../assets/logo.jpg";
+
+// Масив із даними про вільні місця
+const vacancies = [
+  { grade: "1 класи", count: 2, category: "Початкова школа", icon: "fa-shapes" },
+  { grade: "2 класи", count: 2, category: "Початкова школа", icon: "fa-child" },
+  { grade: "3 класи", count: 0, category: "Початкова школа", icon: "fa-book-open" },
+  { grade: "4 класи", count: 0, category: "Початкова школа", icon: "fa-graduation-cap" },
+  { grade: "5 класи", count: 0, category: "Базова школа", icon: "fa-compass" },
+  { grade: "6 класи", count: 4, category: "Базова школа", icon: "fa-atom" },
+  { grade: "7 класи", count: 8, category: "Базова школа", icon: "fa-flask" },
+  { grade: "8 класи", count: 5, category: "Базова школа", icon: "fa-microscope" },
+  { grade: "9 класи", count: 10, category: "Базова школа", icon: "fa-award" },
+];
+
+const totalVacancies = vacancies.reduce((acc, item) => acc + item.count, 0);
 ---
 
-<div class="flex-grow container mx-auto p-4">
-        <div class="w-full bg-white p-6 rounded-lg shadow-md">
-            <article>
-                <h1 class="text-xl sm:text-2xl font-bold text-center mb-6 leading-tight" style="color: rgb(75, 100, 150);">
-                    <br>
-                    <strong>Вільні місця у гімназії станом на 1 вересня 2025 р.</strong>
-                </h1>
-            
-                <div class="space-y-3">
-                    <h1 class="text-lg font-medium flex justify-between border-b pb-1"><span>1 класи</span> <strong>2</strong></h1>
-                    <h1 class="text-lg font-medium flex justify-between border-b pb-1"><span>2 класи</span> <strong>2</strong></h1>
-                    <h1 class="text-lg font-medium flex justify-between border-b pb-1"><span>3 класи</span> <strong>0</strong></h1>
-                    <h1 class="text-lg font-medium flex justify-between border-b pb-1"><span>4 класи</span> <strong>0</strong></h1>
-                    <h1 class="text-lg font-medium flex justify-between border-b pb-1" style="color: rgb(75, 100, 150);"><span>5 класи</span> <strong>0</strong></h1>
-                    <h1 class="text-lg font-medium flex justify-between border-b pb-1" style="color: rgb(75, 100, 150);"><span>6 класи</span> <strong>4</strong></h1>
-                    <h1 class="text-lg font-medium flex justify-between border-b pb-1" style="color: rgb(75, 100, 150);"><span>7 класи</span> <strong>8</strong></h1>
-                    <h1 class="text-lg font-medium flex justify-between border-b pb-1" style="color: rgb(75, 100, 150);"><span>8 класи</span> <strong>5</strong></h1>
-                    <h1 class="text-lg font-medium flex justify-between border-b pb-1" style="color: rgb(75, 100, 150);"><span>9 класи</span> <strong>10</strong></h1>
-                </div>
-            </article>
+<div class="flex-grow container mx-auto px-4 py-8 max-w-5xl font-inter">
+  <!-- Головна картка-контейнер -->
+  <article class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden">
+    
+    <!-- Шапка з градієнтом у стилі референсу -->
+    <header class="bg-gradient-to-br from-[#394e77] via-[#4b6496] to-[#2c3e50] text-white p-6 sm:p-8 text-center relative overflow-hidden">
+      <!-- Декоративна іконка на фоні -->
+      <div class="absolute -right-6 -bottom-6 text-white/10 text-9xl pointer-events-none select-none">
+        <i class="fa-solid fa-user-graduate"></i>
+      </div>
+
+      <div class="relative z-10 space-y-3">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs sm:text-sm font-medium text-amber-300 border border-white/20">
+          <i class="fa-regular fa-calendar-check"></i>
+          Станом на 1 вересня 2027 р.
+        </span>
+
+        <h1 class="font-oswald text-2xl sm:text-3xl md:text-4xl font-bold tracking-wide uppercase text-white drop-shadow-sm">
+          Вільні місця у гімназії
+        </h1>
+
+        <!-- Загальна кількість -->
+        <div class="pt-2 flex justify-center items-center gap-2 text-slate-200 text-sm sm:text-base">
+          <span>Всього вільних місць:</span>
+          <span class="bg-amber-500 text-white font-oswald font-bold px-3 py-0.5 rounded-full text-base sm:text-lg shadow-sm">
+            {totalVacancies}
+          </span>
         </div>
+      </div>
+    </header>
+
+    <!-- Основний контент -->
+    <div class="p-6 sm:p-8 space-y-8">
+      
+      <!-- Сетка картки класів -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {vacancies.map((item) => (
+          <div 
+            class={`relative rounded-xl p-5 border transition-all duration-200 flex items-center justify-between group ${
+              item.count > 0 
+                ? "bg-slate-50/50 hover:bg-slate-50 border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5" 
+                : "bg-slate-50/30 border-slate-100 opacity-60"
+            }`}
+          >
+            <div class="flex items-center gap-3.5">
+              <div class={`w-10 h-10 rounded-lg flex items-center justify-center text-base transition-colors ${
+                item.count > 0 
+                  ? "bg-[#4b6496]/10 text-[#4b6496] group-hover:bg-[#4b6496] group-hover:text-white" 
+                  : "bg-slate-200 text-slate-400"
+              }`}>
+                <i class={`fa-solid ${item.icon}`}></i>
+              </div>
+              <div>
+                <h3 class="font-oswald text-lg font-bold text-slate-800 leading-none mb-1">
+                  {item.grade}
+                </h3>
+                <span class="text-xs text-slate-500 block">
+                  {item.category}
+                </span>
+              </div>
+            </div>
+
+            <!-- Бейдж з кількістю -->
+            <div>
+              {item.count > 0 ? (
+                <span class="inline-flex items-center justify-center min-w-[2.25rem] h-9 px-2.5 rounded-lg bg-[#4b6496] text-white font-oswald text-lg font-bold shadow-sm">
+                  {item.count}
+                </span>
+              ) : (
+                <span class="inline-flex items-center justify-center min-w-[2.25rem] h-9 px-2.5 rounded-lg bg-slate-200 text-slate-500 font-oswald text-sm font-semibold">
+                  0
+                </span>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Інформаційне повідомлення для батьків -->
+      <div class="bg-amber-50 border-l-4 border-amber-500 rounded-r-xl p-4 sm:p-5 text-sm text-slate-700 flex items-start gap-3">
+        <i class="fa-solid fa-circle-info text-amber-500 text-lg mt-0.5 flex-shrink-0"></i>
+        <div class="space-y-1">
+          <p class="font-semibold text-slate-900">Інформація щодо зарахування:</p>
+          <p class="text-slate-600 leading-relaxed">
+            Для уточнення деталей щодо подачі документів або наявності місць звертайтеся до адміністрації гімназії у приймальні години.
+          </p>
+        </div>
+      </div>
+
     </div>
+  </article>
 </div>
 
 <style>
-    /* Застосування шрифту Inter до всього тіла документа */
-    body {
-        font-family: "Open Sans", sans-serif;
-        background-color: #f3f4f6; /* Light gray background */
-        font-size: larger;
-    }
+  /* Шрифти Inter та Oswald підключаються глобально або через Layout */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap');
+
+  .font-inter {
+    font-family: 'Inter', sans-serif;
+  }
+  .font-oswald {
+    font-family: 'Oswald', sans-serif;
+  }
 </style>
